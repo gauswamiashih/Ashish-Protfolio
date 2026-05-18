@@ -381,13 +381,13 @@ export default function Portfolio() {
           </div>
 
           <h1 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(40px,7vw,84px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "28px", letterSpacing: "-0.02em" }}>
-            <span style={{ color: "#f1f5f9" }}>Building the Future with</span><br />
-            <span style={{ background: "linear-gradient(135deg,#93c5fd,#c4b5fd,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI, Cybersecurity</span><br />
-            <span style={{ color: "#f1f5f9" }}>&amp; Intelligent Systems</span>
+            <span style={{ color: "#f1f5f9" }}>Engineering</span><br />
+            <span style={{ background: "linear-gradient(135deg,#93c5fd,#c4b5fd,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Intelligent Systems</span><br />
+            <span style={{ color: "#f1f5f9" }}>&amp; Secure Frontiers</span>
           </h1>
 
           <p style={{ color: "#64748b", fontSize: "clamp(15px,2vw,19px)", lineHeight: 1.7, maxWidth: "680px", margin: "0 auto 48px", minHeight: "60px" }}>
-            <Typewriter text="Computer Engineering student focused on AI integration, secure systems, automation, full-stack development, and futuristic digital experiences." speed={30} />
+            <Typewriter text="Transforming complex problems into elegant, scalable, and AI-driven solutions. I build software that thinks, scales, and protects." speed={30} />
           </p>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", justifyContent: "center", marginBottom: "56px" }}>
@@ -516,10 +516,10 @@ export default function Portfolio() {
         <div style={{ maxWidth: "1200px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 2 }}>
           <p className="section-label">The Vision</p>
           <h2 className="section-title" style={{ marginBottom: "24px" }}>
-            Architecting the <span style={{ background: "linear-gradient(135deg,#63b3ed,#8b5cf6,#ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2030 Web</span>
+            Pioneering the <span style={{ background: "linear-gradient(135deg,#63b3ed,#8b5cf6,#ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Next Era</span>
           </h2>
-          <p style={{ color: "#475569", fontSize: "18px", maxWidth: "600px", margin: "0 auto 64px", lineHeight: 1.7 }}>
-            AI-native interfaces. Zero-trust architectures. Autonomous systems. The future isn't coming — it's being built right now.
+          <p style={{ color: "#475569", fontSize: "18px", maxWidth: "680px", margin: "0 auto 64px", lineHeight: 1.7 }}>
+            We are transitioning from static pages to intelligent, self-healing, and context-aware environments. Here is the blueprint for modern engineering.
           </p>
           {/* Bento Box Visual Grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "140px", gap: "20px", maxWidth: "1000px", margin: "0 auto" }}>
