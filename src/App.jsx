@@ -5,7 +5,7 @@ const NAV_LINKS = ["About", "Skills", "Projects", "Contact"];
 const SKILLS = [
   { cat: "AI & LLM APIs", items: ["OpenAI API", "Gemini", "LangChain", "Hugging Face"], pct: 82 },
   { cat: "Full Stack Dev", items: ["React", "Next.js", "Node.js", "TypeScript"], pct: 88 },
-  { cat: "Backend & DB", items: ["Supabase", "Firebase", "PostgreSQL", "REST APIs"], pct: 80 },
+  { cat: "Backend & DB", items: ["Supabase", "PostgreSQL", "REST APIs"], pct: 80 },
   { cat: "Cybersecurity", items: ["Linux", "Network Security", "OWASP", "CTF Basics"], pct: 70 },
   { cat: "Cloud & DevOps", items: ["Git", "GitHub Actions", "Vercel", "Docker Basics"], pct: 75 },
   { cat: "UI/UX Systems", items: ["Tailwind CSS", "Framer Motion", "Figma", "GSAP"], pct: 85 },
@@ -16,7 +16,7 @@ const PROJECTS = [
     title: "NagrikSetu",
     subtitle: "Smart Civic Management Platform",
     desc: "A futuristic civic SaaS platform with complaint tracking, geolocation, real-time analytics, dashboards and authentication — bridging citizens and governance.",
-    tech: ["React", "TypeScript", "Supabase", "Firebase", "OpenStreetMap", "Tailwind"],
+    tech: ["React", "TypeScript", "Supabase", "OpenStreetMap", "Tailwind"],
     color: "#3b82f6",
     glow: "#1d4ed8",
     icon: "⬡",
