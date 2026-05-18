@@ -451,8 +451,8 @@ export default function Portfolio() {
 
             {/* GitHub Stats Card */}
             <div className="glass" style={{ borderRadius: "20px", padding: "24px", display: "flex", flexWrap: "wrap", gap: "16px", justifyContent: "center" }}>
-              <img src="https://github-readme-stats.vercel.app/api?username=gauswamiashih&show_icons=true&theme=radical&bg_color=00000000&title_color=63b3ed&icon_color=8b5cf6&text_color=94a3b8&hide_border=true" alt="GitHub Stats" style={{ height: "160px" }} />
-              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=gauswamiashih&layout=compact&theme=radical&bg_color=00000000&title_color=63b3ed&text_color=94a3b8&hide_border=true" alt="Top Languages" style={{ height: "160px" }} />
+              <img src="https://github-readme-stats-eight-theta.vercel.app/api?username=gauswamiashih&show_icons=true&theme=radical&bg_color=00000000&title_color=63b3ed&icon_color=8b5cf6&text_color=94a3b8&hide_border=true" alt="GitHub Stats" style={{ height: "160px" }} />
+              <img src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=gauswamiashih&layout=compact&theme=radical&bg_color=00000000&title_color=63b3ed&text_color=94a3b8&hide_border=true" alt="Top Languages" style={{ height: "160px" }} />
             </div>
 
             <Terminal />
@@ -521,20 +521,39 @@ export default function Portfolio() {
           <p style={{ color: "#475569", fontSize: "18px", maxWidth: "600px", margin: "0 auto 64px", lineHeight: 1.7 }}>
             AI-native interfaces. Zero-trust architectures. Autonomous systems. The future isn't coming — it's being built right now.
           </p>
-          {/* HUD grid visual */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "20px", maxWidth: "800px", margin: "0 auto" }}>
+          {/* Bento Box Visual Grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "140px", gap: "20px", maxWidth: "1000px", margin: "0 auto" }}>
             {[
-              { label: "AI Systems", val: "Neural", icon: "◈", color: "#8b5cf6" },
-              { label: "Security", val: "Zero Trust", icon: "◉", color: "#10b981" },
-              { label: "Automation", val: "Autonomous", icon: "◆", color: "#f59e0b" },
-              { label: "Full Stack", val: "Serverless", icon: "⬡", color: "#3b82f6" },
-              { label: "Performance", val: "Edge Native", icon: "◇", color: "#ec4899" },
-              { label: "Experience", val: "Immersive", icon: "○", color: "#06b6d4" },
-            ].map(item => (
-              <div key={item.label} className="glass" style={{ borderRadius: "16px", padding: "28px 20px", textAlign: "center", animation: "float 4s ease-in-out infinite", animationDelay: Math.random() * 2 + "s" }}>
-                <div style={{ fontSize: "24px", color: item.color, marginBottom: "12px", filter: `drop-shadow(0 0 10px ${item.color})` }}>{item.icon}</div>
-                <div style={{ fontFamily: "'Syne',sans-serif", fontWeight: 700, color: "#f1f5f9", fontSize: "14px", marginBottom: "4px" }}>{item.val}</div>
-                <div style={{ color: "#475569", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>{item.label}</div>
+              { label: "AI Systems", val: "Neural Intelligence", icon: "◈", color: "#8b5cf6", cols: 2, rows: 2, desc: "Self-learning models driving next-gen predictive algorithms." },
+              { label: "Security", val: "Zero Trust", icon: "◉", color: "#10b981", cols: 2, rows: 1, desc: "Verify everything. Trust absolutely nothing." },
+              { label: "Automation", val: "Autonomous", icon: "◆", color: "#f59e0b", cols: 1, rows: 1, desc: "Self-healing ops." },
+              { label: "Architecture", val: "Serverless", icon: "⬡", color: "#3b82f6", cols: 1, rows: 1, desc: "Infinite scale." },
+              { label: "Performance", val: "Edge Native", icon: "◇", color: "#ec4899", cols: 2, rows: 1, desc: "Zero-latency computing at the global edge." },
+              { label: "Experience", val: "Immersive UI", icon: "○", color: "#06b6d4", cols: 2, rows: 1, desc: "Blurring the line between human and machine." },
+            ].map((item, i) => (
+              <div key={item.label} className="glass" style={{ 
+                gridColumn: `span ${item.cols}`, gridRow: `span ${item.rows}`,
+                borderRadius: "24px", padding: item.cols > 1 ? "32px" : "20px", textAlign: item.cols > 1 ? "left" : "center",
+                display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", overflow: "hidden",
+                animation: "slideIn 0.8s ease-out forwards", animationDelay: `${i * 0.15}s`, opacity: 0
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = item.color + "50"; e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = `0 15px 40px ${item.color}20`; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
+                {/* Background glow for large items */}
+                {item.cols > 1 && <div style={{ position: "absolute", bottom: "-20%", right: "-10%", width: "150px", height: "150px", background: `radial-gradient(circle, ${item.color}20, transparent 70%)`, pointerEvents: "none" }} />}
+                
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: item.cols > 1 ? "16px" : "8px", justifyContent: item.cols > 1 ? "flex-start" : "center" }}>
+                  <div style={{ fontSize: item.cols > 1 ? "32px" : "24px", color: item.color, filter: `drop-shadow(0 0 12px ${item.color})` }}>{item.icon}</div>
+                  {item.cols > 1 && <div style={{ color: item.color, fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>{item.label}</div>}
+                </div>
+                
+                <div style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, color: "#f1f5f9", fontSize: item.cols > 1 ? "24px" : "15px", marginBottom: "8px" }}>{item.val}</div>
+                
+                {item.cols > 1 ? (
+                  <div style={{ color: "#94a3b8", fontSize: "14px", lineHeight: 1.6, maxWidth: "80%" }}>{item.desc}</div>
+                ) : (
+                  <div style={{ color: "#64748b", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>{item.label}</div>
+                )}
               </div>
             ))}
           </div>
