@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from "react";
 const NAV_LINKS = ["About", "Skills", "Projects", "Contact"];
 
 const SKILLS = [
-  { cat: "AI & LLM APIs", items: ["OpenAI API", "Gemini", "LangChain", "Hugging Face"], pct: 82 },
-  { cat: "Full Stack Dev", items: ["React", "Next.js", "Node.js", "TypeScript"], pct: 88 },
+  { cat: "AI & LLM APIs", items: ["OpenAI API", "Gemini", "ChatGPT", "Cloud", "Antigravity"], pct: 82 },
+  { cat: "Full Stack Dev", items: ["React", "Next.js", "Node.js", "TypeScript", "Python", "HTML", "CSS", "Basic C"], pct: 88 },
   { cat: "Backend & DB", items: ["Supabase", "PostgreSQL", "REST APIs"], pct: 80 },
   { cat: "Cybersecurity", items: ["Linux", "Network Security", "OWASP", "CTF Basics"], pct: 70 },
   { cat: "Cloud & DevOps", items: ["Git", "GitHub Actions", "Vercel", "Docker Basics"], pct: 75 },
@@ -22,16 +22,27 @@ const PROJECTS = [
     icon: "⬡",
     demoLink: "https://nagriksetu-main.vercel.app/",
   },
+  {
+    title: "Brotherhood Clothing",
+    subtitle: "Palanpur's Fashion Market Storefront",
+    desc: "A premium luxury e-commerce storefront and product catalog web application designed for Palanpur's fashion market. Features a sleek black-and-gold aesthetic, glassmorphism UI, and interactive collection galleries.",
+    tech: ["React", "Vite", "Tailwind CSS", "Glassmorphism UI"],
+    color: "#D4AF37",
+    glow: "#8B5CF6",
+    icon: "✦",
+    demoLink: "https://brotherhood-clothing.vercel.app/",
+  },
 ];
 
 
 const CERTS = [
-  { title: "Cyber Hackathon", org: "Ganpat University", icon: "⬡", color: "#3b82f6" },
-  { title: "IEEE Event Participation", org: "IEEE Student Chapter", icon: "◈", color: "#8b5cf6" },
-  { title: "AI Impact Summit", org: "Innovation Cell", icon: "◉", color: "#10b981" },
-  { title: "NIPAM IPR Awareness", org: "Govt. of India Initiative", icon: "◆", color: "#f59e0b" },
-  { title: "Startup Innovation Forum", org: "Entrepreneurship Cell", icon: "◇", color: "#ec4899" },
-  { title: "National Science Day", org: "Ganpat University", icon: "○", color: "#06b6d4" },
+  { title: "Gen AI on AWS", org: "AWS Student Builder Groups", icon: "✦", color: "#f97316", link: "https://drive.google.com/file/d/13Lih68iN1IrwwpOMOXkhl_mOPLQIyujH/view?usp=drivesdk" },
+  { title: "Cyber Threat Management", org: "Cisco Networking Academy", icon: "⬢", color: "#0ea5e9", link: "https://drive.google.com/file/d/1O-2j8gC0VxrDH4RWeaiMSkJGxEdLLd0w/view?usp=drivesdk" },
+  { title: "Cybersecurity Analyst", org: "Tata | Forage", icon: "⬩", color: "#14b8a6", link: "https://drive.google.com/file/d/1RxOTXxuEVH7KHcdotaxzZgpCqdm9iq8l/view?usp=drivesdk" },
+  { title: "Cyber Hackathon", org: "Ganpat University", icon: "⬡", color: "#3b82f6", link: "https://drive.google.com/file/d/1sTe9kr1RO046HAJnqFF-FnhG_K97x19-/view?usp=drivesdk" },
+  { title: "IEEE Event Participation", org: "IEEE Student Chapter", icon: "◈", color: "#8b5cf6", link: "https://drive.google.com/file/d/1YRJUp4aPU83S1cAIQX-DM_12HrXDndGe/view?usp=drivesdk" },
+  { title: "AI Impact Summit", org: "Innovation Cell", icon: "◉", color: "#10b981", link: "https://drive.google.com/file/d/14gIowMQdKeXcMKMljfoe9sNn6f1qBaxv/view?usp=drivesdk" },
+  { title: "NIPAM IPR Awareness", org: "Govt. of India Initiative", icon: "◆", color: "#f59e0b", link: "https://drive.google.com/file/d/1Ukj5xpgimchVM9cq1UhoRrNf_VnGDylm/view?usp=drivesdk" },
 ];
 
 function useCountUp(target, duration = 2000, start = false) {
@@ -212,11 +223,30 @@ function ProjectCard({ project }) {
 
 function CertCard({ cert }) {
   const [hov, setHov] = useState(false);
+  const isClickable = !!cert.link;
+  const handleClick = () => {
+    if (isClickable) {
+      playSound("click");
+      window.open(cert.link, "_blank", "noopener,noreferrer");
+    }
+  };
   return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)", border: `1px solid ${hov ? cert.color + "50" : "rgba(255,255,255,0.07)"}`, borderRadius: "16px", padding: "24px", transition: "all 0.3s", transform: hov ? "translateY(-4px)" : "none", boxShadow: hov ? `0 12px 40px ${cert.color}30` : "none" }}>
+    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={handleClick}
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        backdropFilter: "blur(12px)",
+        border: `1px solid ${hov ? (isClickable ? cert.color + "50" : "rgba(255,255,255,0.15)") : "rgba(255,255,255,0.07)"}`,
+        borderRadius: "16px",
+        padding: "24px",
+        transition: "all 0.3s",
+        transform: hov ? "translateY(-4px)" : "none",
+        boxShadow: hov && isClickable ? `0 12px 40px ${cert.color}30` : "none",
+        cursor: isClickable ? "pointer" : "default"
+      }}>
       <div style={{ fontSize: "28px", marginBottom: "12px", color: cert.color, filter: `drop-shadow(0 0 8px ${cert.color})` }}>{cert.icon}</div>
-      <h4 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 700, color: "#f1f5f9", fontSize: "15px", margin: "0 0 6px" }}>{cert.title}</h4>
+      <h4 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 700, color: "#f1f5f9", fontSize: "15px", margin: "0 0 6px" }}>
+        {cert.title} {isClickable && <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 400, marginLeft: "4px" }}>↗</span>}
+      </h4>
       <p style={{ color: "#64748b", fontSize: "12px", fontFamily: "'Space Grotesk',sans-serif", margin: 0 }}>{cert.org}</p>
     </div>
   );
@@ -434,10 +464,10 @@ export default function Portfolio() {
           <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               {[
-                { label: "Projects", val: "10+", icon: "◆", color: "#3b82f6" },
+                { label: "Projects", val: "5+", icon: "◆", color: "#3b82f6" },
                 { label: "Techs", val: "20+", icon: "◈", color: "#8b5cf6" },
                 { label: "Hackathons", val: "5+", icon: "⬡", color: "#10b981" },
-                { label: "Certs", val: "6+", icon: "◉", color: "#f59e0b" },
+                { label: "Certs", val: "7+", icon: "◉", color: "#f59e0b" },
               ].map(s => (
                 <div key={s.label} className="glass" style={{ borderRadius: "20px", padding: "24px", textAlign: "center", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = s.color + "40"; e.currentTarget.style.boxShadow = `0 8px 30px ${s.color}20`; }}
