@@ -36,13 +36,13 @@ const PROJECTS = [
 
 
 const CERTS = [
+  { title: "Certified LLM Security Professional (CLLMSP)", org: "Red Team Leaders", icon: "🛡️", color: "#ef4444", link: "https://drive.google.com/file/d/1xlaFwDrUHWNfEhDnaNQ2lMFtffuzlwqN/view?usp=drive_link" },
   { title: "Gen AI on AWS", org: "AWS Student Builder Groups", icon: "✦", color: "#f97316", link: "https://drive.google.com/file/d/13Lih68iN1IrwwpOMOXkhl_mOPLQIyujH/view?usp=drivesdk" },
   { title: "Cyber Threat Management", org: "Cisco Networking Academy", icon: "⬢", color: "#0ea5e9", link: "https://drive.google.com/file/d/1O-2j8gC0VxrDH4RWeaiMSkJGxEdLLd0w/view?usp=drivesdk" },
   { title: "Cybersecurity Analyst", org: "Tata | Forage", icon: "⬩", color: "#14b8a6", link: "https://drive.google.com/file/d/1RxOTXxuEVH7KHcdotaxzZgpCqdm9iq8l/view?usp=drivesdk" },
   { title: "Cyber Hackathon", org: "Ganpat University", icon: "⬡", color: "#3b82f6", link: "https://drive.google.com/file/d/1sTe9kr1RO046HAJnqFF-FnhG_K97x19-/view?usp=drivesdk" },
   { title: "IEEE Event Participation", org: "IEEE Student Chapter", icon: "◈", color: "#8b5cf6", link: "https://drive.google.com/file/d/1YRJUp4aPU83S1cAIQX-DM_12HrXDndGe/view?usp=drivesdk" },
   { title: "AI Impact Summit", org: "Innovation Cell", icon: "◉", color: "#10b981", link: "https://drive.google.com/file/d/14gIowMQdKeXcMKMljfoe9sNn6f1qBaxv/view?usp=drivesdk" },
-  { title: "NIPAM IPR Awareness", org: "Govt. of India Initiative", icon: "◆", color: "#f59e0b", link: "https://drive.google.com/file/d/1Ukj5xpgimchVM9cq1UhoRrNf_VnGDylm/view?usp=drivesdk" },
 ];
 
 function useCountUp(target, duration = 2000, start = false) {
