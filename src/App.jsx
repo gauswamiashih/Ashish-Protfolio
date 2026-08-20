@@ -7,8 +7,7 @@ const NAV_LINKS = [
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
   { id: "journey", label: "Journey" },
-  { id: "certs", label: "Certs" },
-  { id: "education", label: "Education" },
+  { id: "certs", label: "Certifications" },
   { id: "contact", label: "Contact" }
 ];
 
@@ -365,7 +364,7 @@ function SkillBar({ skill, delay }) {
         <div style={{ flex: 1 }}>
           <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, color: "#e2e8f0", fontSize: "16px" }}>{skill.cat}</h4>
         </div>
-        <span style={{ color: skill.color, fontWeight: 700, fontSize: "15px" }}>{skill.pct}%</span>
+        <span style={{ color: skill.color, fontWeight: 700, fontSize: "12px", background: skill.color + "15", padding: "4px 10px", borderRadius: "100px", border: `1px solid ${skill.color}30` }}>Focus Level: {skill.pct}%</span>
       </div>
       <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: "100px", height: "6px", overflow: "hidden", marginBottom: "16px" }}>
         <div style={{ height: "100%", borderRadius: "100px", width: visible ? `${skill.pct}%` : "0%", background: `linear-gradient(90deg, ${skill.color}, #a78bfa)`, transition: `width 1.2s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`, boxShadow: `0 0 12px ${skill.color}80` }} />
@@ -755,7 +754,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "skills", "projects", "journey", "certs", "education", "contact"];
+      const sections = ["hero", "about", "skills", "projects", "journey", "certs", "contact"];
       const scrollPos = window.scrollY + 250; // offset for scroll spy
       
       for (const section of sections) {
@@ -1203,6 +1202,21 @@ export default function Portfolio() {
         .nagriksetu-mock .mock-floating-panel .label { font-size: 6px; color: #64748b; }
         .nagriksetu-mock .mock-floating-panel .val { font-size: 7px; color: var(--preview-accent); font-weight: 700; }
 
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(14px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          opacity: 0;
+          animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes floatCard {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(0.5deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+
         @keyframes pulseDot {
           0%, 100% { opacity: 0.5; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.3); }
@@ -1444,68 +1458,93 @@ export default function Portfolio() {
         <div style={{ position: "absolute", top: "25%", left: "55%", width: "550px", height: "550px", background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 8s infinite" }} />
         <div style={{ position: "absolute", top: "55%", left: "15%", width: "350px", height: "350px", background: "radial-gradient(circle, rgba(var(--accent-glow-rgb), 0.08) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 12s infinite" }} />
 
-        <div className="hero-layout" style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 0.8fr", alignItems: "center", gap: "32px", position: "relative", zIndex: 2 }}>
+        <div className="hero-layout" style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.25fr 0.75fr", alignItems: "center", gap: "48px", position: "relative", zIndex: 2 }}>
           
-          <div className="hero-content-wrapper" style={{ animation: heroVisible ? "slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "none" }}>
-            <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "10px", padding: "8px 20px", borderRadius: "100px", background: "rgba(var(--accent-glow-rgb), 0.08)", border: "1px solid var(--accent-glow)", marginBottom: "32px" }}>
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent-primary)", animation: "pulseGlow 1.5s infinite" }} />
-              <span style={{ fontSize: "11px", color: "var(--accent-secondary)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Available for Collaborations</span>
+          <div className="hero-content-wrapper">
+            {/* Animated Small Label */}
+            <div className="animate-fade-in" style={{ display: "inline-flex", alignItems: "center", marginBottom: "28px", animationDelay: "100ms" }}>
+              <span style={{ fontSize: "10px", color: "var(--accent-secondary)", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", fontFamily: "'Space Grotesk', sans-serif" }}>
+                COMPUTER ENGINEERING • SOFTWARE • CYBERSECURITY
+              </span>
             </div>
 
-            <h1 className="hero-title" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(34px, 5.5vw, 68px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-0.02em" }}>
-              <span style={{ color: "#f1f5f9" }}>GAUSWAMI ASHISH</span><br />
-              <span style={{ background: "var(--theme-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Computer Engineering</span><br />
-              <span style={{ color: "#f1f5f9" }}>&amp; Cybersecurity</span>
+            {/* Large Typography Name */}
+            <h1 className="hero-title animate-fade-in" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(46px, 7.5vw, 84px)", fontWeight: 900, lineHeight: 0.95, marginBottom: "20px", letterSpacing: "-0.03em", color: "#f1f5f9", animationDelay: "250ms" }}>
+              GAUSWAMI<br />
+              ASHISH
             </h1>
 
-            <p className="hero-desc" style={{ color: "#94a3b8", fontSize: "clamp(15px, 2vw, 17px)", lineHeight: 1.7, maxWidth: "620px", marginBottom: "36px", minHeight: "56px" }}>
-              <Typewriter text="B.Tech Computer Engineering student at Ganpat University. Focused on Generative AI integration, secure full-stack software development, and cybersecurity." speed={25} />
-            </p>
-
-            <div className="hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "24px" }}>
-              <GlowBtn primary onClick={() => scrollTo("projects")}>View Projects ⬡</GlowBtn>
-              <a href="https://drive.google.com/file/d/1xRnLrVrKMPoBTUeW_KD1FBToYriMM8P-/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <GlowBtn>View Resume 📄</GlowBtn>
-              </a>
-              <GlowBtn onClick={() => scrollTo("contact")}>Contact Me ↗</GlowBtn>
+            {/* Headline and Subtitle */}
+            <div className="animate-fade-in" style={{ animationDelay: "400ms" }}>
+              <div className="hero-headline" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(22px, 3.5vw, 32px)", fontWeight: 800, color: "#f1f5f9", marginBottom: "12px" }}>
+                Software Engineer
+              </div>
+              <div className="hero-subheadline" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(16px, 2vw, 22px)", fontWeight: 600, color: "#94a3b8", lineHeight: 1.3, marginBottom: "28px" }}>
+                Building <span style={{ background: "linear-gradient(135deg, #3b82f6, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Secure</span>, <span style={{ background: "linear-gradient(135deg, #8b5cf6, #ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Intelligent</span> &amp; <span style={{ background: "linear-gradient(135deg, #a78bfa, #3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Scalable</span> Digital Solutions.
+              </div>
             </div>
 
-            <div className="hero-social-links" style={{ display: "flex", gap: "20px", alignItems: "center", marginBottom: "40px" }}>
+            {/* Supporting Description */}
+            <p className="hero-desc animate-fade-in" style={{ color: "#94a3b8", fontSize: "clamp(14px, 1.8vw, 16px)", lineHeight: 1.6, maxWidth: "580px", marginBottom: "36px", animationDelay: "550ms" }}>
+              Computer Engineering student at Ganpat University focused on Full-Stack Development, Cybersecurity, and AI/ML integration. I build practical software solutions with modern web technologies, secure architectures, and AI-powered capabilities.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="hero-actions animate-fade-in" style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "20px", animationDelay: "700ms" }}>
+              <GlowBtn primary onClick={() => scrollTo("projects")} style={{ padding: "10px 22px", fontSize: "13px" }}>View My Projects</GlowBtn>
+              <a href="https://drive.google.com/file/d/1xRnLrVrKMPoBTUeW_KD1FBToYriMM8P-/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                <GlowBtn style={{ padding: "10px 22px", fontSize: "13px" }}>Download Resume</GlowBtn>
+              </a>
+              <span onClick={() => scrollTo("contact")} style={{ color: "#94a3b8", fontSize: "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", padding: "6px 12px" }}
+                onMouseEnter={e => e.target.style.color = "var(--accent-primary)"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
+                Let's Connect →
+              </span>
+            </div>
+
+            {/* Social Links */}
+            <div className="hero-social-links animate-fade-in" style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "40px", animationDelay: "800ms" }}>
               <a 
                 href="https://github.com/gauswamiashih" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                style={{ color: "#94a3b8", textDecoration: "none", fontSize: "13px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
+                style={{ color: "#64748b", textDecoration: "none", fontSize: "12px", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = "var(--accent-primary)"}
-                onMouseLeave={e => e.target.style.color = "#94a3b8"}
+                onMouseLeave={e => e.target.style.color = "#64748b"}
               >
-                <span>⌥ GitHub</span>
+                ⌥ github
               </a>
-              <span style={{ color: "#2d3748" }}>|</span>
+              <span style={{ color: "rgba(255,255,255,0.06)", fontSize: "12px" }}>/</span>
               <a 
                 href="https://www.linkedin.com/in/gauswami-ashish-078870293?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                style={{ color: "#94a3b8", textDecoration: "none", fontSize: "13px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
+                style={{ color: "#64748b", textDecoration: "none", fontSize: "12px", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = "var(--accent-primary)"}
-                onMouseLeave={e => e.target.style.color = "#94a3b8"}
+                onMouseLeave={e => e.target.style.color = "#64748b"}
               >
-                <span>◈ LinkedIn</span>
+                ◈ linkedin
               </a>
             </div>
 
-            <div className="hero-tags" style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}>
-              {[["Full Stack Dev", "⬡"], ["AI Explorer", "◈"], ["Cyber Enthusiast", "◉"], ["Hackathon Competitor", "◆"]].map(([label, icon]) => (
-                <div key={label} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{ color: "var(--accent-primary)", fontSize: "16px" }}>{icon}</span>
-                  <span style={{ color: "#94a3b8", fontSize: "14px", fontWeight: 500 }}>{label}</span>
+            {/* Small Profile Highlights */}
+            <div className="hero-highlights-row animate-fade-in" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px", marginTop: "16px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px", animationDelay: "900ms" }}>
+              {[
+                { title: "B.Tech Computer Engineering", desc: "Ganpat University • 2023–2027" },
+                { title: "Cyber Hackathon", desc: "2nd Position • TechVerse 2026" },
+                { title: "LLM Security", desc: "Certified LLM Security Professional" }
+              ].map((hl, idx) => (
+                <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--accent-secondary)", letterSpacing: "0.05em", textTransform: "uppercase", fontFamily: "'Space Grotesk', sans-serif" }}>{hl.title}</span>
+                  <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 500 }}>{hl.desc}</span>
                 </div>
               ))}
             </div>
+
           </div>
 
           {/* Right Hologram Wireframe Grid */}
-          <div className="hero-right" style={{ display: "flex", justifyContent: "flex-end", zIndex: 1 }}>
+          <div className="hero-right animate-fade-in" style={{ display: "flex", justifyContent: "flex-end", zIndex: 1, animationDelay: "300ms" }}>
             <div className="hologram-wireframe" style={{
               width: "clamp(240px, 30vw, 360px)",
               height: "clamp(240px, 30vw, 360px)",
@@ -1577,6 +1616,87 @@ export default function Portfolio() {
                   background: "var(--accent-primary)",
                   boxShadow: "0 0 10px var(--accent-primary)"
                 }} />
+              </div>
+
+              {/* Floating System Cards */}
+              <div className="system-float-card" style={{
+                position: "absolute",
+                top: "5%",
+                left: "-8%",
+                background: "rgba(2, 4, 8, 0.75)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: "8px",
+                padding: "6px 12px",
+                fontSize: "10px",
+                fontWeight: 700,
+                color: "#f1f5f9",
+                letterSpacing: "0.08em",
+                animation: "floatCard 5s ease-in-out infinite",
+                zIndex: 3,
+                fontFamily: "'Space Grotesk', sans-serif"
+              }}>
+                ⚡ FULL STACK
+              </div>
+              
+              <div className="system-float-card" style={{
+                position: "absolute",
+                top: "5%",
+                right: "-8%",
+                background: "rgba(2, 4, 8, 0.75)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: "8px",
+                padding: "6px 12px",
+                fontSize: "10px",
+                fontWeight: 700,
+                color: "#f1f5f9",
+                letterSpacing: "0.08em",
+                animation: "floatCard 6s ease-in-out infinite 0.5s",
+                zIndex: 3,
+                fontFamily: "'Space Grotesk', sans-serif"
+              }}>
+                🤖 AI / ML
+              </div>
+
+              <div className="system-float-card" style={{
+                position: "absolute",
+                bottom: "15%",
+                left: "-12%",
+                background: "rgba(2, 4, 8, 0.75)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: "8px",
+                padding: "6px 12px",
+                fontSize: "10px",
+                fontWeight: 700,
+                color: "#f1f5f9",
+                letterSpacing: "0.08em",
+                animation: "floatCard 7s ease-in-out infinite 1s",
+                zIndex: 3,
+                fontFamily: "'Space Grotesk', sans-serif"
+              }}>
+                🛡️ CYBERSECURITY
+              </div>
+
+              <div className="system-float-card" style={{
+                position: "absolute",
+                bottom: "15%",
+                right: "-12%",
+                background: "rgba(2, 4, 8, 0.75)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: "8px",
+                padding: "6px 12px",
+                fontSize: "10px",
+                fontWeight: 700,
+                color: "#f1f5f9",
+                letterSpacing: "0.08em",
+                animation: "floatCard 5.5s ease-in-out infinite 1.5s",
+                zIndex: 3,
+                fontFamily: "'Space Grotesk', sans-serif"
+              }}>
+                ☁️ CLOUD / APIs
               </div>
 
             </div>
