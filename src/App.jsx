@@ -1,6 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import Planto from "./Planto.jsx";
 
-const NAV_LINKS = ["About", "Skills", "Projects", "Contact"];
+const NAV_LINKS = [
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "certs", label: "Certs" },
+  { id: "contact", label: "Contact" }
+];
 
 const SKILLS = [
   { 
@@ -110,6 +118,21 @@ const PROJECTS = [
     ),
     demoLink: "https://brotherhood-ebon-omega.vercel.app/",
   },
+  {
+    title: "Planto.",
+    subtitle: "Premium Plant E-Commerce Storefront",
+    desc: "A stunning e-commerce landing page featuring forest-green aesthetics, glassmorphic cards, active review overlays, and an interactive plant carousel widget.",
+    tech: ["React", "CSS Glassmorphism", "Micro-Interactions"],
+    color: "#abd667",
+    glow: "#0e3c23",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/>
+        <path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/>
+      </svg>
+    ),
+    demoLink: "planto-trigger",
+  },
 ];
 
 const CERTS = [
@@ -144,18 +167,32 @@ const playSound = (type) => {
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
       osc.start(); osc.stop(ctx.currentTime + 0.05);
     }
-  } catch (e) {}
+  } catch {
+    // Audio Context is not supported or not allowed to start
+  }
 };
 
-function Particles() {
+function Particles({ theme = "blue" }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: null, y: null });
+  const themeRef = useRef(theme);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let w = (canvas.width = canvas.offsetWidth);
     let h = (canvas.height = canvas.offsetHeight);
+
+    const themeColors = {
+      blue: "59, 130, 246",
+      purple: "139, 92, 246",
+      emerald: "16, 185, 129",
+      pink: "236, 72, 153"
+    };
 
     const particles = Array.from({ length: 70 }, () => ({
       x: Math.random() * w,
@@ -172,6 +209,7 @@ function Particles() {
       
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
+      const colorRGB = themeColors[themeRef.current] || "59, 130, 246";
 
       particles.forEach((p) => {
         p.x += p.vx;
@@ -184,7 +222,7 @@ function Particles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 179, 237, ${p.alpha})`;
+        ctx.fillStyle = `rgba(${colorRGB}, ${p.alpha})`;
         ctx.fill();
 
         if (mx !== null && my !== null) {
@@ -193,7 +231,7 @@ function Particles() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mx, my);
-            ctx.strokeStyle = `rgba(99, 179, 237, ${0.15 * (1 - dMouse / 160)})`;
+            ctx.strokeStyle = `rgba(${colorRGB}, ${0.15 * (1 - dMouse / 160)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -207,7 +245,7 @@ function Particles() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(99, 179, 237, ${0.06 * (1 - d / 110)})`;
+            ctx.strokeStyle = `rgba(${colorRGB}, ${0.06 * (1 - d / 110)})`;
             ctx.lineWidth = 0.4;
             ctx.stroke();
           }
@@ -282,20 +320,20 @@ function GlowBtn({ children, primary, onClick, type = "button" }) {
         letterSpacing: "0.05em", 
         cursor: "pointer",
         transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)", 
-        border: primary ? "none" : "1px solid rgba(99,179,237,0.35)",
-        background: primary ? "linear-gradient(135deg, #3b82f6, #8b5cf6)" : "rgba(99,179,237,0.05)",
+        border: primary ? "none" : "1px solid rgba(var(--accent-glow-rgb), 0.35)",
+        background: primary ? "var(--theme-gradient)" : "rgba(var(--accent-glow-rgb), 0.05)",
         color: "#fff", 
-        boxShadow: primary ? "0 0 20px rgba(59,130,246,0.3)" : "none",
+        boxShadow: primary ? "0 0 20px var(--accent-glow)" : "none",
         outline: "none"
       }}
       onMouseEnter={e => { 
         playSound("click"); 
         e.target.style.transform = "translateY(-2px)"; 
-        e.target.style.boxShadow = primary ? "0 0 35px rgba(59,130,246,0.55)" : "0 0 20px rgba(99,179,237,0.25)"; 
+        e.target.style.boxShadow = primary ? "0 0 35px var(--accent-glow)" : "0 0 20px rgba(var(--accent-glow-rgb), 0.25)"; 
       }}
       onMouseLeave={e => { 
         e.target.style.transform = "none"; 
-        e.target.style.boxShadow = primary ? "0 0 20px rgba(59,130,246,0.4)" : "none"; 
+        e.target.style.boxShadow = primary ? "0 0 20px var(--accent-glow)" : "none"; 
       }}
     >
       {children}
@@ -381,7 +419,111 @@ function SkillBar({ skill, delay }) {
   );
 }
 
-function ProjectCard({ project }) {
+function ProjectPreview({ project }) {
+  if (project.title === "NagrikSetu") {
+    return (
+      <div className="browser-mockup" style={{ borderColor: project.color + "25" }}>
+        <div className="browser-header">
+          <div className="browser-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <div className="browser-bar">nagriksetu.gov.in</div>
+        </div>
+        <div className="browser-content nagriksetu-mock">
+          <div className="mock-sidebar">
+            <div className="mock-logo"></div>
+            <div className="mock-item active"></div>
+            <div className="mock-item"></div>
+            <div className="mock-item"></div>
+          </div>
+          <div className="mock-main">
+            <div className="mock-stats-row">
+              <div className="mock-stat-card"><div className="glow-bar"></div></div>
+              <div className="mock-stat-card"></div>
+              <div className="mock-stat-card"></div>
+            </div>
+            <div className="mock-map-container">
+              <svg width="100%" height="100%" viewBox="0 0 200 100" style={{ opacity: 0.25 }}>
+                <path d="M20,50 L50,20 L100,80 L140,30 L180,70" fill="none" stroke="var(--preview-accent)" strokeWidth="1.5" strokeDasharray="3" />
+                <circle cx="20" cy="50" r="3" fill="#ef4444" className="pulse-dot" />
+                <circle cx="100" cy="80" r="3" fill="var(--preview-accent)" className="pulse-dot" />
+                <circle cx="140" cy="30" r="3" fill="#10b981" className="pulse-dot" />
+              </svg>
+              <div className="mock-floating-panel">
+                <span className="label">Civic Alert</span>
+                <span className="val">Active Node 04</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (project.title === "Brotherhood Clothing") {
+    return (
+      <div className="browser-mockup" style={{ borderColor: project.color + "25" }}>
+        <div className="browser-header">
+          <div className="browser-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <div className="browser-bar">brotherhoodclothing.co</div>
+        </div>
+        <div className="browser-content brotherhood-mock">
+          <div className="mock-shop-hero">
+            <div className="gold-monogram">B</div>
+            <span className="gold-text">BROTHERHOOD</span>
+            <span className="gold-sub">Luxury Apparel Storefront</span>
+          </div>
+          <div className="mock-shop-grid">
+            <div className="mock-shop-card">
+              <div className="mock-item-outline"></div>
+              <span className="item-price">Gold Coat</span>
+            </div>
+            <div className="mock-shop-card">
+              <div className="mock-item-outline"></div>
+              <span className="item-price">Silky Tee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="browser-mockup" style={{ borderColor: project.color + "25" }}>
+        <div className="browser-header">
+          <div className="browser-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <div className="browser-bar">planto.store</div>
+        </div>
+        <div className="browser-content planto-mock">
+          <div style={{ display: "flex", gap: "16px", height: "100%", alignItems: "center", padding: "12px 20px" }}>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 800, fontFamily: "Playfair Display, serif", color: "#fff", lineHeight: 1.1 }}>Breath Natural</span>
+              <span style={{ fontSize: "7px", color: "var(--planto-text-dim)" }}>Premium houseplants generated to filter clean air.</span>
+              <div style={{ background: "var(--planto-accent)", color: "#070e0a", padding: "3px 8px", borderRadius: "100px", fontSize: "7px", fontWeight: 700, width: "fit-content", marginTop: "4px" }}>Rs. 599/-</div>
+            </div>
+            <div style={{ position: "relative", width: "70px", height: "70px" }}>
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle, rgba(171,214,103,0.15) 0%, transparent 60%)" }} />
+              <img 
+                src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=300&auto=format&fit=crop&q=80" 
+                alt="Planto Preview" 
+                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%", border: "1px solid rgba(255,255,255,0.06)" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+function ProjectCard({ project, onDemoClick }) {
   const [hovered, setHovered] = useState(false);
   const cardRef = useRef(null);
 
@@ -400,43 +542,58 @@ function ProjectCard({ project }) {
       onMouseEnter={() => setHovered(true)} 
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
+      className="project-card-container"
       style={{ 
-        background: "radial-gradient(400px circle at var(--mx, 0px) var(--my, 0px), rgba(99,179,237,0.06), transparent 70%), rgba(255,255,255,0.02)", 
+        background: "radial-gradient(400px circle at var(--mx, 0px) var(--my, 0px), rgba(255,255,255,0.02), transparent 70%), rgba(255,255,255,0.01)", 
         borderRadius: "24px", 
-        padding: "36px", 
-        border: `1px solid ${hovered ? project.color + "60" : "rgba(255,255,255,0.07)"}`, 
+        padding: "28px", 
+        border: `1px solid ${hovered ? project.color + "50" : "rgba(255,255,255,0.06)"}`, 
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)", 
-        transform: hovered ? "translateY(-8px)" : "none", 
-        boxShadow: hovered ? `0 20px 60px ${project.glow}30` : "none", 
+        transform: hovered ? "translateY(-6px)" : "none", 
+        boxShadow: hovered ? `0 20px 60px ${project.glow}20` : "none", 
         cursor: "default", 
         position: "relative", 
         overflow: "hidden" 
       }}
     >
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(250px circle at var(--mx, 0px) var(--my, 0px), ${project.color}12, transparent 70%)`, pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, transparent, ${project.color}, transparent)`, opacity: hovered ? 1 : 0, transition: "opacity 0.4s" }} />
       
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
-        <div style={{ fontSize: "36px", color: project.color, filter: `drop-shadow(0 0 12px ${project.color}60)` }}>{project.icon}</div>
-        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: project.color, animation: hovered ? "pulseGlow 1s infinite" : "none" }} />
+      <ProjectPreview project={project} />
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+        <div style={{ fontSize: "28px", color: project.color, filter: `drop-shadow(0 0 10px ${project.color}50)` }}>{project.icon}</div>
+        <span style={{ fontSize: "9px", color: project.color, border: `1px solid ${project.color}25`, background: `${project.color}08`, padding: "4px 10px", borderRadius: "100px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+          {project.demoLink === "planto-trigger" ? "UI DESIGN MOCKUP" : "WEB APPLICATION"}
+        </span>
       </div>
 
-      <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "24px", fontWeight: 800, color: "#f1f5f9", margin: "0 0 8px" }}>{project.title}</h3>
-      <p style={{ color: project.color, fontSize: "12px", fontWeight: 700, margin: "0 0 20px", fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "0.08em", textTransform: "uppercase" }}>{project.subtitle}</p>
-      <p style={{ color: "#94a3b8", fontSize: "14px", lineHeight: "1.7", margin: "0 0 28px", fontFamily: "'Space Grotesk', sans-serif" }}>{project.desc}</p>
+      <h3 className="project-card-title" style={{ fontFamily: "'Syne', sans-serif", fontSize: "22px", fontWeight: 800, color: "#f1f5f9", margin: "0 0 8px", transition: "color 0.3s" }}>{project.title}</h3>
+      <p style={{ color: "#94a3b8", fontSize: "13px", lineHeight: "1.6", margin: "0 0 24px", fontFamily: "'Space Grotesk', sans-serif", minHeight: "48px" }}>{project.desc}</p>
       
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "28px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "28px" }}>
         {project.tech.map(t => (
-          <span key={t} style={{ fontSize: "11px", padding: "4px 12px", borderRadius: "100px", background: `${project.color}12`, color: project.color, border: `1px solid ${project.color}25`, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>{t}</span>
+          <span key={t} style={{ fontSize: "11px", padding: "4px 12px", borderRadius: "100px", background: "rgba(255,255,255,0.03)", color: "#94a3b8", border: "1px solid rgba(255,255,255,0.05)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>{t}</span>
         ))}
       </div>
       
       <div style={{ display: "flex", gap: "12px" }}>
         {project.demoLink && (
-          <a href={project.demoLink} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", textDecoration: "none", flex: 1, padding: "12px", borderRadius: "12px", background: `${project.color}20`, color: project.color, border: `1px solid ${project.color}35`, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "13px", cursor: "pointer", transition: "all 0.3s" }}
-            onMouseEnter={e => { e.target.style.background = project.color + "30"; }}
-            onMouseLeave={e => { e.target.style.background = project.color + "20"; }}>
-            Live Demo ↗
-          </a>
+          project.demoLink === "planto-trigger" ? (
+            <button 
+              onClick={(e) => { e.preventDefault(); onDemoClick?.(); }}
+              style={{ display: "block", textAlign: "center", textDecoration: "none", flex: 1, padding: "12px", borderRadius: "12px", background: `${project.color}20`, color: project.color, border: `1px solid ${project.color}35`, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "13px", cursor: "pointer", transition: "all 0.3s", outline: "none" }}
+              onMouseEnter={e => { e.target.style.background = project.color + "30"; }}
+              onMouseLeave={e => { e.target.style.background = project.color + "20"; }}>
+              Interactive UI ↗
+            </button>
+          ) : (
+            <a href={project.demoLink} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", textDecoration: "none", flex: 1, padding: "12px", borderRadius: "12px", background: `${project.color}20`, color: project.color, border: `1px solid ${project.color}35`, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "13px", cursor: "pointer", transition: "all 0.3s" }}
+              onMouseEnter={e => { e.target.style.background = project.color + "30"; }}
+              onMouseLeave={e => { e.target.style.background = project.color + "20"; }}>
+              Live Demo ↗
+            </a>
+          )
         )}
         <a href="https://github.com/gauswamiashih" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", textDecoration: "none", flex: 1, padding: "12px", borderRadius: "12px", background: "rgba(255,255,255,0.03)", color: "#94a3b8", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "13px", cursor: "pointer", transition: "all 0.3s" }}
           onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.08)"; e.target.style.color = "#fff"; }}
@@ -580,15 +737,33 @@ function Terminal() {
 }
 
 export default function Portfolio() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("portfolio-theme") || "blue");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [heroVisible, setHeroVisible] = useState(false);
   const [sent, setSent] = useState(false);
+  const [currentView, setCurrentView] = useState("portfolio");
+  const [activeSection, setActiveSection] = useState("hero");
+
+  const handleViewChange = (view) => {
+    window.scrollTo(0, 0);
+    setCurrentView(view);
+  };
 
   useEffect(() => {
-    setHeroVisible(true);
+    localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHeroVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     window.soundEnabled = soundEnabled;
   }, [soundEnabled]);
 
@@ -606,6 +781,27 @@ export default function Portfolio() {
       window.removeEventListener("scroll", onScroll); 
       window.removeEventListener("mousemove", onMove); 
     };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["hero", "about", "skills", "projects", "certs", "contact"];
+      const scrollPos = window.scrollY + 250; // offset for scroll spy
+      
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollTo = (id) => {
@@ -628,8 +824,10 @@ export default function Portfolio() {
     e.currentTarget.style.setProperty("--my", `${y}px`);
   };
 
-  return (
-    <div style={{ background: "#020408", minHeight: "100vh", color: "#fff", fontFamily: "'Space Grotesk', sans-serif", overflowX: "hidden", position: "relative" }}>
+  return currentView === "planto" ? (
+    <Planto onViewChange={handleViewChange} />
+  ) : (
+    <div className={`theme-${theme}`} style={{ background: "#020408", minHeight: "100vh", color: "#fff", fontFamily: "'Space Grotesk', sans-serif", overflowX: "hidden", position: "relative" }}>
       
       <style>{`
         * { box-sizing: border-box; margin: 0; }
@@ -762,65 +960,445 @@ export default function Portfolio() {
             grid-row: span 1 !important;
           }
         }
+
+        /* Floating Capsule Header Navbar */
+        .capsule-nav-container {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          gap: 28px;
+          background: rgba(2, 4, 8, 0.45);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 100px;
+          padding: 8px 24px;
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          width: auto;
+          max-width: 90%;
+        }
+
+        .capsule-nav-logo {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          font-size: 16px;
+          background: var(--theme-gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          cursor: pointer;
+          letter-spacing: -0.02em;
+          white-space: nowrap;
+        }
+
+        .capsule-nav-links {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .capsule-nav-link {
+          color: #94a3b8;
+          text-decoration: none;
+          font-size: 12.5px;
+          font-weight: 600;
+          padding: 6px 14px;
+          border-radius: 100px;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          white-space: nowrap;
+        }
+
+        .capsule-nav-link:hover {
+          color: #fff;
+        }
+
+        .capsule-nav-link.active {
+          background: rgba(255, 255, 255, 0.06);
+          color: #fff;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 12px rgba(255, 255, 255, 0.02);
+        }
+
+        .capsule-status {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(16, 185, 129, 0.06);
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          padding: 6px 12px;
+          border-radius: 50px;
+          white-space: nowrap;
+        }
+
+        .capsule-status-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #10b981;
+          animation: pulseGlow 1.5s infinite;
+        }
+
+        .capsule-status-text {
+          font-size: 8.5px;
+          color: #10b981;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .capsule-theme-picker {
+          display: flex;
+          gap: 6px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          padding: 4px 8px;
+          border-radius: 100px;
+        }
+
+        .capsule-mobile-toggle {
+          display: none;
+          cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+          .capsule-nav-links, .capsule-status, .capsule-theme-picker, .capsule-sound-btn, .capsule-connect-btn {
+            display: none !important;
+          }
+          .capsule-mobile-toggle {
+            display: flex !important;
+            flex-direction: column;
+            gap: 5px;
+            width: 20px;
+            height: 14px;
+            justify-content: center;
+          }
+          .capsule-nav-container {
+            justify-content: space-between;
+            width: 90%;
+            padding: 12px 24px;
+          }
+        }
+
+        /* Premium Browser Mockup Previews */
+        .browser-mockup {
+          background: rgba(2, 4, 8, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          overflow: hidden;
+          margin-bottom: 24px;
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          transform-style: preserve-3d;
+          perspective: 1000px;
+        }
+
+        .browser-header {
+          background: rgba(14, 20, 30, 0.6);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          height: 32px;
+          display: flex;
+          align-items: center;
+          padding: 0 16px;
+          gap: 12px;
+          position: relative;
+        }
+
+        .browser-dots {
+          display: flex;
+          gap: 6px;
+          align-items: center;
+        }
+
+        .browser-dots .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          display: inline-block;
+        }
+
+        .browser-dots .dot.red { background: #ff5f56; }
+        .browser-dots .dot.yellow { background: #ffbd2e; }
+        .browser-dots .dot.green { background: #27c93f; }
+
+        .browser-bar {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+          font-size: 10px;
+          font-family: monospace;
+          color: #64748b;
+          padding: 2px 16px;
+          margin-left: 24px;
+          flex: 0.6;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .browser-content {
+          height: 160px;
+          position: relative;
+          overflow: hidden;
+          background: radial-gradient(150px circle at 50% 50%, rgba(255, 255, 255, 0.015), transparent 70%);
+        }
+
+        /* NagrikSetu Mock */
+        .nagriksetu-mock {
+          --preview-accent: #3b82f6;
+          display: flex;
+        }
+        .nagriksetu-mock .mock-sidebar {
+          width: 32px;
+          background: rgba(14, 20, 30, 0.4);
+          border-right: 1px solid rgba(255,255,255,0.03);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 10px 0;
+          gap: 12px;
+        }
+        .nagriksetu-mock .mock-sidebar .mock-logo {
+          width: 14px;
+          height: 14px;
+          border-radius: 3px;
+          background: var(--preview-accent);
+          opacity: 0.8;
+        }
+        .nagriksetu-mock .mock-sidebar .mock-item {
+          width: 12px;
+          height: 4px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 1px;
+        }
+        .nagriksetu-mock .mock-sidebar .mock-item.active {
+          background: var(--preview-accent);
+        }
+        .nagriksetu-mock .mock-main {
+          flex: 1;
+          padding: 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .nagriksetu-mock .mock-stats-row {
+          display: flex;
+          gap: 8px;
+        }
+        .nagriksetu-mock .mock-stat-card {
+          flex: 1;
+          height: 24px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.04);
+          border-radius: 6px;
+          position: relative;
+          overflow: hidden;
+        }
+        .nagriksetu-mock .mock-stat-card .glow-bar {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 40%;
+          background: linear-gradient(90deg, var(--preview-accent), transparent);
+          opacity: 0.15;
+        }
+        .nagriksetu-mock .mock-map-container {
+          flex: 1;
+          background: rgba(255,255,255,0.01);
+          border: 1px solid rgba(255,255,255,0.03);
+          border-radius: 8px;
+          position: relative;
+          overflow: hidden;
+        }
+        .nagriksetu-mock .mock-floating-panel {
+          position: absolute;
+          bottom: 8px;
+          right: 8px;
+          background: rgba(4,9,15,0.85);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 4px;
+          padding: 4px 8px;
+          display: flex;
+          flex-direction: column;
+          font-family: monospace;
+        }
+        .nagriksetu-mock .mock-floating-panel .label { font-size: 6px; color: #64748b; }
+        .nagriksetu-mock .mock-floating-panel .val { font-size: 7px; color: var(--preview-accent); font-weight: 700; }
+
+        @keyframes pulseDot {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.3); }
+        }
+        .pulse-dot {
+          animation: pulseDot 2s infinite ease-in-out;
+          transform-origin: center;
+        }
+
+        /* Brotherhood Clothing Mock */
+        .brotherhood-mock {
+          --preview-accent: #D4AF37;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(20, 15, 10, 0.4) 100%);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 12px;
+        }
+        .brotherhood-mock .mock-shop-hero {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2px;
+          margin-bottom: 12px;
+        }
+        .brotherhood-mock .gold-monogram {
+          font-family: 'Playfair Display', serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: var(--preview-accent);
+          text-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+          border: 1px solid var(--preview-accent);
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .brotherhood-mock .gold-text {
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.15em;
+          color: #fff;
+        }
+        .brotherhood-mock .gold-sub {
+          font-size: 6px;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+        .brotherhood-mock .mock-shop-grid {
+          display: flex;
+          gap: 12px;
+          width: 100%;
+          justify-content: center;
+        }
+        .brotherhood-mock .mock-shop-card {
+          width: 60px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .brotherhood-mock .mock-item-outline {
+          height: 36px;
+          background: rgba(255,255,255,0.01);
+          border: 1px solid rgba(212, 175, 55, 0.1);
+          border-radius: 4px;
+          position: relative;
+        }
+        .brotherhood-mock .mock-item-outline::after {
+          content: '';
+          position: absolute;
+          inset: 8px;
+          border: 1.5px solid rgba(212, 175, 55, 0.25);
+          border-radius: 2px;
+        }
+        .brotherhood-mock .item-price {
+          font-size: 6px;
+          color: #64748b;
+          text-align: center;
+        }
+
+        /* Planto Mock */
+        .planto-mock {
+          --preview-accent: #abd667;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(7, 14, 10, 0.4) 100%);
+        }
+
+        /* Project Card 3D tilt effects */
+        .project-card-container:hover .browser-mockup {
+          transform: perspective(1000px) rotateX(10deg) rotateY(-8deg) translateY(-6px);
+          border-color: rgba(var(--project-glow-rgb, 255,255,255), 0.25);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--project-glow-rgb, 255,255,255), 0.08);
+        }
+        .project-card-container:hover .project-card-title {
+          background: var(--theme-gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
       `}</style>
 
       {/* Global Cursor Glow */}
       <div className="cursor-glow" style={{ left: cursor.x, top: cursor.y }} />
 
       {/* NAV */}
-      <nav style={{ 
-        position: "fixed", 
-        top: 0, 
-        left: 0, 
-        right: 0, 
-        zIndex: 100, 
-        padding: "0 8%", 
-        height: "80px", 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "space-between", 
-        background: scrollY > 50 ? "rgba(2,4,8,0.92)" : "transparent", 
-        backdropFilter: scrollY > 50 ? "blur(20px)" : "none", 
-        borderBottom: scrollY > 50 ? "1px solid rgba(255,255,255,0.06)" : "none", 
-        transition: "all 0.4s" 
+      <div className="capsule-nav-container" style={{
+        background: scrollY > 50 ? "rgba(4, 9, 15, 0.75)" : "rgba(4, 9, 15, 0.45)",
+        borderColor: scrollY > 50 ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)",
+        padding: scrollY > 50 ? "6px 24px" : "8px 32px"
       }}>
-        <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "22px", background: "linear-gradient(135deg, #63b3ed, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: "-0.02em", cursor: "pointer" }} onClick={() => scrollTo("hero")}>
-          Gauswami Ashish
-        </div>
-        
-        {/* Desktop Navigation */}
-        <div className="nav-desktop" style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-          <div className="status-badge">
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10b981", animation: "pulseGlow 1.5s infinite" }} />
-            <span style={{ fontSize: "10px", color: "#10b981", fontWeight: 700, letterSpacing: "0.1em" }}>SYSTEM ONLINE</span>
-          </div>
-          {NAV_LINKS.map(l => (
-            <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase())}>{l}</span>
-          ))}
-          
-          {/* Sound Toggle */}
-          <button 
-            onClick={() => setSoundEnabled(!soundEnabled)} 
-            style={{ background: "transparent", border: "none", color: soundEnabled ? "#63b3ed" : "#475569", cursor: "pointer", fontSize: "20px", display: "flex", alignItems: "center", transition: "color 0.3s", outline: "none" }}
-            title={soundEnabled ? "Mute Sounds" : "Enable Sound FX"}
-          >
-            {soundEnabled ? "🔊" : "🔇"}
-          </button>
-          
-          <GlowBtn primary onClick={() => scrollTo("contact")}>Connect ↗</GlowBtn>
+        <div className="capsule-nav-logo" onClick={() => scrollTo("hero")}>
+          Ashish
         </div>
 
-        {/* Hamburger Toggle (Mobile) */}
-        <div 
-          className="menu-toggle" 
-          onClick={() => { playSound("click"); setMenuOpen(!menuOpen); }} 
-          style={{ display: "none", flexDirection: "column", gap: "6px", cursor: "pointer", zIndex: 110, width: "30px", height: "24px", justifyContent: "center" }}
-        >
-          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", transform: menuOpen ? "rotate(45deg) translate(6px, 6px)" : "none" }} />
-          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", opacity: menuOpen ? 0 : 1 }} />
-          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+        {/* Desktop Navigation */}
+        <div className="capsule-nav-links">
+          {NAV_LINKS.map(l => (
+            <span 
+              key={l.id} 
+              className={`capsule-nav-link ${activeSection === l.id ? "active" : ""}`}
+              onClick={() => scrollTo(l.id)}
+            >
+              {l.label}
+            </span>
+          ))}
         </div>
-      </nav>
+
+        {/* System Online badge */}
+        <div className="capsule-status">
+          <div className="capsule-status-dot" />
+          <span className="capsule-status-text">SYSTEM ONLINE</span>
+        </div>
+
+        {/* Theme Picker */}
+        <div className="capsule-theme-picker">
+          <div className={`theme-dot ${theme === "blue" ? "active" : ""}`} style={{ background: "#3b82f6", width: "12px", height: "12px" }} onClick={() => setTheme("blue")} title="Cyber Blue" />
+          <div className={`theme-dot ${theme === "purple" ? "active" : ""}`} style={{ background: "#8b5cf6", width: "12px", height: "12px" }} onClick={() => setTheme("purple")} title="Midnight Purple" />
+          <div className={`theme-dot ${theme === "emerald" ? "active" : ""}`} style={{ background: "#10b981", width: "12px", height: "12px" }} onClick={() => setTheme("emerald")} title="Emerald Green" />
+          <div className={`theme-dot ${theme === "pink" ? "active" : ""}`} style={{ background: "#ec4899", width: "12px", height: "12px" }} onClick={() => setTheme("pink")} title="Neon Pink" />
+        </div>
+
+        {/* Sound toggle button */}
+        <button 
+          className="capsule-sound-btn"
+          onClick={() => setSoundEnabled(!soundEnabled)} 
+          style={{ background: "transparent", border: "none", color: soundEnabled ? "var(--accent-secondary)" : "#475569", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", transition: "color 0.3s", outline: "none" }}
+          title={soundEnabled ? "Mute Sounds" : "Enable Sound FX"}
+        >
+          {soundEnabled ? "🔊" : "🔇"}
+        </button>
+
+        <div className="capsule-connect-btn">
+          <GlowBtn primary onClick={() => scrollTo("contact")} style={{ padding: "8px 20px", fontSize: "12px" }}>Connect ↗</GlowBtn>
+        </div>
+
+        {/* Mobile menu hamburger toggle */}
+        <div 
+          className="capsule-mobile-toggle"
+          onClick={() => { playSound("click"); setMenuOpen(!menuOpen); }} 
+        >
+          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", opacity: menuOpen ? 0 : 1 }} />
+          <div style={{ width: "100%", height: "2px", background: "#fff", transition: "0.3s", transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
+        </div>
+      </div>
 
       {/* Mobile Menu Drawer */}
       <div style={{
@@ -843,55 +1421,67 @@ export default function Portfolio() {
         pointerEvents: menuOpen ? "auto" : "none"
       }}>
         {NAV_LINKS.map(l => (
-          <span key={l} style={{ fontSize: "26px", fontWeight: 800, fontFamily: "'Syne', sans-serif", color: "#f1f5f9", cursor: "pointer" }} onClick={() => scrollTo(l.toLowerCase())}>{l}</span>
+          <span key={l.id} style={{ fontSize: "26px", fontWeight: 800, fontFamily: "'Syne', sans-serif", color: "#f1f5f9", cursor: "pointer" }} onClick={() => scrollTo(l.id)}>{l.label}</span>
         ))}
+
+        {/* Mobile Theme Selector */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+          <span style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#94a3b8", fontWeight: 600 }}>Select Theme</span>
+          <div className="theme-picker-container" style={{ background: "rgba(255,255,255,0.08)" }}>
+            <div className={`theme-dot ${theme === "blue" ? "active" : ""}`} style={{ background: "#3b82f6", width: "18px", height: "18px" }} onClick={() => setTheme("blue")} title="Cyber Blue" />
+            <div className={`theme-dot ${theme === "purple" ? "active" : ""}`} style={{ background: "#8b5cf6", width: "18px", height: "18px" }} onClick={() => setTheme("purple")} title="Midnight Purple" />
+            <div className={`theme-dot ${theme === "emerald" ? "active" : ""}`} style={{ background: "#10b981", width: "18px", height: "18px" }} onClick={() => setTheme("emerald")} title="Emerald Green" />
+            <div className={`theme-dot ${theme === "pink" ? "active" : ""}`} style={{ background: "#ec4899", width: "18px", height: "18px" }} onClick={() => setTheme("pink")} title="Neon Pink" />
+          </div>
+        </div>
+
         <button 
           onClick={() => setSoundEnabled(!soundEnabled)} 
           style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", borderRadius: "30px", padding: "12px 28px", cursor: "pointer", fontSize: "15px", display: "flex", alignItems: "center", gap: "10px", outline: "none" }}
         >
           <span>Sound FX:</span>
-          <span style={{ color: soundEnabled ? "#63b3ed" : "#94a3b8" }}>{soundEnabled ? "ON 🔊" : "OFF 🔇"}</span>
+          <span style={{ color: soundEnabled ? "var(--accent-secondary)" : "#94a3b8" }}>{soundEnabled ? "ON 🔊" : "OFF 🔇"}</span>
         </button>
         <GlowBtn primary onClick={() => scrollTo("contact")}>Connect ↗</GlowBtn>
       </div>
 
       {/* HERO */}
-      <section id="hero" className="grid-bg" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", padding: "120px 8% 80px" }}>
-        <Particles />
+      <section id="hero" className="hero-section grid-bg">
+        <Particles theme={theme} />
         
         {/* Visual Orbs */}
-        <div style={{ position: "absolute", top: "25%", left: "55%", width: "550px", height: "550px", background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 8s infinite" }} />
-        <div style={{ position: "absolute", top: "55%", left: "15%", width: "350px", height: "350px", background: "radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 12s infinite" }} />
+        <div style={{ position: "absolute", top: "25%", left: "55%", width: "550px", height: "550px", background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 8s infinite" }} />
+        <div style={{ position: "absolute", top: "55%", left: "15%", width: "350px", height: "350px", background: "radial-gradient(circle, rgba(var(--accent-glow-rgb), 0.08) 0%, transparent 70%)", pointerEvents: "none", animation: "pulseGlow 12s infinite" }} />
 
         <div className="hero-layout" style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 0.8fr", alignItems: "center", gap: "32px", position: "relative", zIndex: 2 }}>
           
-          <div style={{ animation: heroVisible ? "slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "none" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", padding: "8px 20px", borderRadius: "100px", background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.25)", marginBottom: "32px" }}>
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#3b82f6", animation: "pulseGlow 1.5s infinite" }} />
-              <span style={{ fontSize: "11px", color: "#93c5fd", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Available for Collaborations</span>
+          <div className="hero-content-wrapper" style={{ animation: heroVisible ? "slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "none" }}>
+            <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "10px", padding: "8px 20px", borderRadius: "100px", background: "rgba(var(--accent-glow-rgb), 0.08)", border: "1px solid var(--accent-glow)", marginBottom: "32px" }}>
+              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent-primary)", animation: "pulseGlow 1.5s infinite" }} />
+              <span style={{ fontSize: "11px", color: "var(--accent-secondary)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Available for Collaborations</span>
             </div>
 
-            <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(38px, 6vw, 76px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-0.02em" }}>
+            <h1 className="hero-title" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(38px, 6vw, 76px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-0.02em" }}>
               <span style={{ color: "#f1f5f9" }}>Engineering</span><br />
-              <span style={{ background: "linear-gradient(135deg,#63b3ed,#8b5cf6,#ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Intelligent Systems</span><br />
+              <span style={{ background: "var(--theme-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Intelligent Systems</span><br />
               <span style={{ color: "#f1f5f9" }}>&amp; Secure Frontiers</span>
             </h1>
 
-            <p style={{ color: "#94a3b8", fontSize: "clamp(15px, 2vw, 18px)", lineHeight: 1.7, maxWidth: "620px", marginBottom: "40px", minHeight: "56px" }}>
+            <p className="hero-desc" style={{ color: "#94a3b8", fontSize: "clamp(15px, 2vw, 18px)", lineHeight: 1.7, maxWidth: "620px", marginBottom: "40px", minHeight: "56px" }}>
               <Typewriter text="Transforming complex problems into elegant, scalable, and AI-driven solutions. I build software that thinks, scales, and protects." speed={25} />
             </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "48px" }}>
+            <div className="hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "48px" }}>
               <GlowBtn primary onClick={() => scrollTo("projects")}>Explore Projects ⬡</GlowBtn>
-              <a href="https://drive.google.com/file/d/13Df2A7L547X_zWa0sRqbDXGvWwQV7pC8/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <a href="https://drive.google.com/file/d/1xRnLrVrKMPoBTUeW_KD1FBToYriMM8P-/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
                 <GlowBtn>Download Resume 📄</GlowBtn>
               </a>
             </div>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}>
+            <div className="hero-tags" style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}>
               {[["Full Stack Dev", "⬡"], ["AI Explorer", "◈"], ["Cyber Enthusiast", "◉"], ["Hackathon Competitor", "◆"]].map(([label, icon]) => (
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{ color: "#3b82f6", fontSize: "16px" }}>{icon}</span>
+                  <span style={{ color: "var(--accent-primary)", fontSize: "16px" }}>{icon}</span>
                   <span style={{ color: "#94a3b8", fontSize: "14px", fontWeight: 500 }}>{label}</span>
                 </div>
               ))}
@@ -906,21 +1496,73 @@ export default function Portfolio() {
               position: "relative",
               transformStyle: "preserve-3d"
             }}>
-              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px dashed rgba(99,179,237,0.35)", transform: "rotateX(75deg) rotateY(15deg)", boxShadow: "0 0 30px rgba(99,179,237,0.15)" }} />
-              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px dashed rgba(139,92,246,0.35)", transform: "rotateY(75deg) rotateX(15deg)", boxShadow: "0 0 30px rgba(139,92,246,0.15)" }} />
-              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "1.5px solid rgba(236,72,153,0.3)", transform: "rotateZ(45deg)", animation: "spinSlow 12s linear infinite reverse" }} />
+              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px dashed var(--accent-primary)", transform: "rotateX(75deg) rotateY(15deg)", boxShadow: "0 0 30px var(--accent-glow)" }} />
+              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px dashed var(--accent-secondary)", transform: "rotateY(75deg) rotateX(15deg)", boxShadow: "0 0 30px var(--accent-glow)" }} />
+              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "1.5px solid var(--accent-primary)", transform: "rotateZ(45deg)", animation: "spinSlow 12s linear infinite reverse" }} />
               
-              {/* Inner core */}
+              {/* Inner core - Stylized Profile Avatar */}
               <div style={{
                 position: "absolute",
-                top: "20%",
-                left: "20%",
-                width: "60%",
-                height: "60%",
+                top: "15%",
+                left: "15%",
+                width: "70%",
+                height: "70%",
                 borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(99,179,237,0.35) 0%, rgba(139,92,246,0.1) 50%, transparent 80%)",
-                animation: "pulseGlow 3s infinite ease-in-out"
-              }} />
+                overflow: "hidden",
+                border: "2.5px solid var(--accent-primary)",
+                boxShadow: "0 0 35px var(--accent-glow), inset 0 0 20px var(--accent-glow)",
+                animation: "float 6s ease-in-out infinite",
+                background: "rgba(0, 0, 0, 0.4)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 2
+              }}>
+                <img 
+                  src="/avatar.jpg" 
+                  alt="Gauswami Ashish Devpuri Avatar" 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                  onMouseEnter={e => { e.target.style.transform = "scale(1.08) rotate(1deg)"; }}
+                  onMouseLeave={e => { e.target.style.transform = "none"; }}
+                />
+              </div>
+
+              {/* Orbiting Node 1 Container */}
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                animation: "spinSlow 12s linear infinite"
+              }}>
+                <div style={{
+                  position: "absolute",
+                  top: "-4px",
+                  left: "50%",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  background: "var(--accent-secondary)",
+                  boxShadow: "0 0 12px var(--accent-secondary)"
+                }} />
+              </div>
+
+              {/* Orbiting Node 2 Container */}
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                animation: "spinSlow 8s linear infinite reverse"
+              }}>
+                <div style={{
+                  position: "absolute",
+                  bottom: "-3px",
+                  left: "50%",
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  background: "var(--accent-primary)",
+                  boxShadow: "0 0 10px var(--accent-primary)"
+                }} />
+              </div>
+
             </div>
           </div>
 
@@ -929,7 +1571,7 @@ export default function Portfolio() {
         {/* Scroll Indicator */}
         <div style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: 0.5 }}>
           <span style={{ fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#64748b", fontWeight: 700 }}>Scroll</span>
-          <div style={{ width: "1px", height: "40px", background: "linear-gradient(to bottom, #3b82f6, transparent)", animation: "pulseGlow 2s infinite" }} />
+          <div style={{ width: "1px", height: "40px", background: "linear-gradient(to bottom, var(--accent-primary), transparent)", animation: "pulseGlow 2s infinite" }} />
         </div>
       </section>
 
@@ -1016,7 +1658,7 @@ export default function Portfolio() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "32px", justifyContent: "center" }}>
             {PROJECTS.map((p, i) => (
               <Reveal key={p.title} delay={i * 100}>
-                <ProjectCard project={p} />
+                <ProjectCard project={p} onDemoClick={() => handleViewChange("planto")} />
               </Reveal>
             ))}
           </div>
@@ -1155,8 +1797,7 @@ export default function Portfolio() {
                   display: "flex", 
                   flexDirection: "column", 
                   justifyContent: "center",
-                  animation: heroVisible ? "slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "none",
-                  animationDelay: `${i * 0.15}s`,
+                  animation: heroVisible ? `slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.15}s forwards` : "none",
                   opacity: 0
                 }}
                 onMouseMove={handleBentoMouseMove}

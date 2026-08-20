@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
+.planto-theme {
+  --planto-bg: #070e0a;
+  --planto-bg-darker: #040906;
+  --planto-bg-card: rgba(14, 28, 20, 0.45);
+  --planto-border-glass: rgba(255, 255, 255, 0.07);
+  --planto-border-active: rgba(171, 214, 103, 0.35);
+  
+  --planto-text: #f3f7f4;
+  --planto-text-dim: #8fa296;
+  --planto-accent: #abd667;
+  --planto-accent-rgb: 171, 214, 99;
+  --planto-glow-color: rgba(171, 214, 103, 0.15);
+  
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--planto-bg);
+  color: var(--planto-text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Glowing Spotlights */
+.planto-glow-spot {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.planto-glow-1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(14, 60, 35, 0.3) 0%, transparent 70%);
+  top: -10%;
+  left: 20%;
+}
+
+.planto-glow-2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(171, 214, 103, 0.06) 0%, transparent 70%);
+  top: 30%;
+  right: -10%;
+}
+
+.planto-glow-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(14, 60, 35, 0.25) 0%, transparent 70%);
+  bottom: 10%;
+  left: -5%;
+}
+
+/* Floating animation */
+@keyframes plantoFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes plantoFloatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(0.5deg); }
+}
+
+.planto-animate-float {
+  animation: plantoFloat 5s ease-in-out infinite;
+}
+
+.planto-animate-float-slow {
+  animation: plantoFloatSlow 8s ease-in-out infinite;
+}
+
+/* Glassmorphism Panels */
+.planto-glass {
+  background: var(--planto-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--planto-border-glass);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planto-glass:hover {
+  border-color: var(--planto-border-active);
+  box-shadow: 0 20px 40px rgba(171, 214, 103, 0.08);
+}
+
+/* Planto Buttons */
+.planto-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.planto-btn-primary {
+  background: var(--planto-accent);
+  color: #070e0a;
+  border: 1px solid var(--planto-accent);
+  box-shadow: 0 4px 15px rgba(171, 214, 103, 0.25);
+}
+
+.planto-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(171, 214, 103, 0.45);
+  background: #c2f86d;
+  border-color: #c2f86d;
+}
+
+.planto-btn-secondary {
+  background: transparent;
+  color: var(--planto-text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.planto-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.planto-btn-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--planto-border-glass);
+  color: var(--planto-text);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planto-btn-icon:hover {
+  background: rgba(171, 214, 103, 0.1);
+  border-color: var(--planto-accent);
+  color: var(--planto-accent);
+  transform: translateY(-2px);
+}
+
+/* Planto Navigation */
+.planto-nav-item {
+  color: var(--planto-text-dim);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.planto-nav-item:hover, .planto-nav-item.active {
+  color: var(--planto-text);
+}
+
+/* Typography styles */
+.planto-title-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Products Grid Section */
+.planto-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Product Card specific styles */
+.planto-product-card {
+  padding: 20px;
+  border-radius: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.planto-product-img-wrapper {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 16px;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.planto-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planto-product-card:hover .planto-product-img {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.planto-rating-star {
+  color: #f59e0b;
+}
+
+/* Floating Return Button */
+.planto-back-bar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(4, 9, 6, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 18px;
+  border-radius: 100px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.planto-back-btn {
+  color: var(--planto-accent);
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.planto-back-btn:hover {
+  color: #fff;
+}
+
+/* Hero plant overlay text formatting */
+.planto-hero-overlay-title {
+  font-size: clamp(32px, 6vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.08);
+  font-family: 'Playfair Display', serif;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar for planto */
+.planto-theme::-webkit-scrollbar-thumb {
+  background: var(--planto-accent);
+}
+
+/* Carousel dots */
+.planto-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.planto-dot.active {
+  width: 24px;
+  border-radius: 100px;
+  background: var(--planto-accent);
+}
+
+/* Responsive constraints */
+@media (max-width: 1024px) {
+  .planto-hero-layout {
+    grid-template-columns: 1fr !important;
+    gap: 48px;
+  }
+  .planto-hero-center-box {
+    margin: 40px auto 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .planto-desktop-nav {
+    display: none !important;
+  }
+  .planto-mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+/* Infinite Scrolling Marquee */
+.planto-marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 24px 0;
+  background: rgba(4, 9, 6, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 2;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.planto-marquee-track {
+  display: inline-flex;
+  animation: plantoMarquee 35s linear infinite;
+  gap: 30px;
+}
+
+@keyframes plantoMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.planto-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 28, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 28px;
+  border-radius: 100px;
+  color: var(--planto-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.planto-marquee-item:hover {
+  border-color: var(--planto-accent);
+  box-shadow: 0 0 20px rgba(171, 214, 103, 0.15);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* Planto Scroll Reveal Classes */
+.planto-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planto-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay modifiers */
+.planto-delay-100 { transition-delay: 100ms; }
+.planto-delay-200 { transition-delay: 200ms; }
+.planto-delay-300 { transition-delay: 300ms; }
+.planto-delay-400 { transition-delay: 400ms; }
+
+/* Custom Planto Cursor Glow */
+.planto-cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(171, 214, 103, 0.07) 0%, rgba(14, 60, 35, 0.02) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out;
+}
+
+/* Floating Particles (Leaves) Canvas overlay */
+.planto-particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover scales and tilts */
+.planto-hover-scale {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.planto-hover-scale:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(171, 214, 103, 0.08);
+}
