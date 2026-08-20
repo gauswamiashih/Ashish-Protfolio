@@ -6,93 +6,57 @@ const NAV_LINKS = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
+  { id: "journey", label: "Journey" },
   { id: "certs", label: "Certs" },
+  { id: "education", label: "Education" },
   { id: "contact", label: "Contact" }
 ];
 
 const SKILLS = [
   { 
-    cat: "AI & LLM APIs", 
-    items: ["OpenAI API", "Gemini", "ChatGPT", "Cloud", "Antigravity"], 
-    pct: 82, 
-    color: "#8b5cf6",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2a5 5 0 0 1 5 5v2a5 5 0 0 1-5 5a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
-        <path d="M12 14v6"/>
-        <path d="M9 17h6"/>
-        <path d="M6 8h12"/>
-      </svg>
-    )
-  },
-  { 
-    cat: "Full Stack Dev", 
-    items: ["React", "Next.js", "Node.js", "TypeScript", "Python", "HTML", "CSS", "Basic C"], 
-    pct: 88, 
+    cat: "Proficient", 
+    items: ["Python", "JavaScript", "Firebase", "Supabase", "SQLite", "REST APIs", "Git"], 
+    pct: 85, 
     color: "#3b82f6",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="18" height="12" x="3" y="4" rx="2" ry="2"/>
-        <line x1="2" x2="22" y1="20" y2="20"/>
-        <line x1="12" x2="12" y1="16" y2="20"/>
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
       </svg>
     )
   },
   { 
-    cat: "Backend & DB", 
-    items: ["Supabase", "PostgreSQL", "REST APIs"], 
-    pct: 80, 
+    cat: "Familiar", 
+    items: ["React", "Node.js", "MySQL", "MongoDB", "Linux"], 
+    pct: 70, 
     color: "#0ea5e9",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <ellipse cx="12" cy="5" rx="9" ry="3"/>
-        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" x2="12" y1="8" y2="16"/>
+        <line x1="8" x2="16" y1="12" y2="12"/>
       </svg>
     )
   },
   { 
-    cat: "Cybersecurity", 
-    items: ["Linux", "Network Security", "OWASP", "CTF Basics"], 
-    pct: 70, 
-    color: "#ef4444",
+    cat: "AI & Security", 
+    items: ["LLM / AI APIs", "Google Drive API", "Prompt Engineering"], 
+    pct: 80, 
+    color: "#8b5cf6",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     )
-  },
-  { 
-    cat: "Cloud & DevOps", 
-    items: ["Git", "GitHub Actions", "Vercel", "Docker Basics"], 
-    pct: 75, 
-    color: "#10b981",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42-1.01-1.04-1.88-1.8-2.58A5.99 5.99 0 0 0 6 12c0 .34.03.67.09 1-.9.64-1.59 1.58-1.93 2.66A3.5 3.5 0 0 0 7.5 19h10z"/>
-      </svg>
-    )
-  },
-  { 
-    cat: "UI/UX Systems", 
-    items: ["Tailwind CSS", "Framer Motion", "Figma", "GSAP"], 
-    pct: 85, 
-    color: "#ec4899",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
-        <path d="M12 8A4 4 0 1 0 12 16A4 4 0 1 0 12 8Z"/>
-      </svg>
-    )
-  },
+  }
 ];
 
 const PROJECTS = [
   {
     title: "NagrikSetu",
     subtitle: "Smart Civic Management Platform",
-    desc: "A futuristic civic SaaS platform with complaint tracking, geolocation, real-time analytics, dashboards and authentication — bridging citizens and governance.",
-    tech: ["React", "TypeScript", "Supabase", "OpenStreetMap", "Tailwind"],
+    desc: "A full-stack civic SaaS platform for complaint reporting and tracking. Key capabilities include complaint reporting/tracking, role-based dashboards, real-time updates, geolocation tracking, notifications, analytics, and secure data handling.",
+    tech: ["HTML", "React", "Vite", "TypeScript", "Tailwind CSS", "shadcn/ui", "React Router", "Supabase", "PostgreSQL", "OpenStreetMap", "Leaflet", "Geolocation", "REST APIs"],
     color: "#3b82f6",
     glow: "#1d4ed8",
     icon: (
@@ -105,24 +69,26 @@ const PROJECTS = [
     demoLink: "https://nagriksetu-main.vercel.app/",
   },
   {
-    title: "Brotherhood Clothing",
-    subtitle: "Palanpur's Fashion Market Storefront",
-    desc: "A premium luxury e-commerce storefront and product catalog web application designed for Palanpur's fashion market. Features a sleek black-and-gold aesthetic, glassmorphism UI, and interactive collection galleries.",
-    tech: ["React", "Vite", "Tailwind CSS", "Glassmorphism UI"],
-    color: "#D4AF37",
-    glow: "#8B5CF6",
+    title: "Ice Cream Web",
+    subtitle: "E-Commerce Django Application",
+    desc: "A complete Django e-commerce application featuring product catalog, cart, checkout, order success/history, authentication, session-based cart, Cash on Delivery, and online payment checkout. Formulated with 4 relational database models (IceCream, Order, OrderItem, Contact).",
+    tech: ["Python", "Django", "SQLite", "Django ORM", "Django Auth", "HTML", "CSS"],
+    color: "#f472b6",
+    glow: "#db2777",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.38 3.46L16 2.18M18.15 6.07l-2.43-.88M3.62 20.54l4.38-1.28M5.85 17.93l2.43-.88M12 2v20M2 12h20"/>
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+        <path d="M2 12h20"/>
       </svg>
     ),
-    demoLink: "https://brotherhood-ebon-omega.vercel.app/",
+    demoLink: null,
   },
   {
     title: "Planto.",
     subtitle: "Premium Plant E-Commerce Storefront",
-    desc: "A stunning e-commerce landing page featuring forest-green aesthetics, glassmorphic cards, active review overlays, and an interactive plant carousel widget.",
-    tech: ["React", "CSS Glassmorphism", "Micro-Interactions"],
+    desc: "A stunning e-commerce landing page featuring forest-green aesthetics, glassmorphic card overlays, active review banners, and an interactive plant carousel widget.",
+    tech: ["React", "Vite", "CSS Glassmorphism", "Micro-Interactions", "Canvas Leaf Particles"],
     color: "#abd667",
     glow: "#0e3c23",
     icon: (
@@ -136,13 +102,11 @@ const PROJECTS = [
 ];
 
 const CERTS = [
-  { title: "Certified LLM Security Professional (CLLMSP)", org: "Red Team Leaders", icon: "🛡️", color: "#ef4444", link: "https://drive.google.com/file/d/1xlaFwDrUHWNfEhDnaNQ2lMFtffuzlwqN/view?usp=drive_link" },
-  { title: "Gen AI on AWS", org: "AWS Student Builder Groups", icon: "✦", color: "#f97316", link: "https://drive.google.com/file/d/13Lih68iN1IrwwpOMOXkhl_mOPLQIyujH/view?usp=drivesdk" },
-  { title: "Cyber Threat Management", org: "Cisco Networking Academy", icon: "⬢", color: "#0ea5e9", link: "https://drive.google.com/file/d/1O-2j8gC0VxrDH4RWeaiMSkJGxEdLLd0w/view?usp=drivesdk" },
-  { title: "Cybersecurity Analyst", org: "Tata | Forage", icon: "⬩", color: "#14b8a6", link: "https://drive.google.com/file/d/1RxOTXxuEVH7KHcdotaxzZgpCqdm9iq8l/view?usp=drivesdk" },
-  { title: "Cyber Hackathon", org: "Ganpat University", icon: "⬡", color: "#3b82f6", link: "https://drive.google.com/file/d/1sTe9kr1RO046HAJnqFF-FnhG_K97x19-/view?usp=drivesdk" },
-  { title: "IEEE Event Participation", org: "IEEE Student Chapter", icon: "◈", color: "#8b5cf6", link: "https://drive.google.com/file/d/1YRJUp4aPU83S1cAIQX-DM_12HrXDndGe/view?usp=drivesdk" },
-  { title: "AI Impact Summit", org: "Innovation Cell", icon: "◉", color: "#10b981", link: "https://drive.google.com/file/d/14gIowMQdKeXcMKMljfoe9sNn6f1qBaxv/view?usp=drivesdk" },
+  { title: "Certified LLM Security Professional (CLLMSP)", org: "Red Team Leaders (June 22, 2026)", icon: "🛡️", color: "#ef4444", link: "https://drive.google.com/file/d/1xlaFwDrUHWNfEhDnaNQ2lMFtffuzlwqN/view?usp=drive_link" },
+  { title: "Gen AI on AWS", org: "AWS Student Builder Groups, Ganpat University", icon: "✦", color: "#f97316", link: "https://drive.google.com/file/d/13Lih68iN1IrwwpOMOXkhl_mOPLQIyujH/view?usp=drivesdk" },
+  { title: "2nd Position — Cyber Hackathon", org: "UVPCE / Ganpat University TechVerse 2026", icon: "🏆", color: "#3b82f6", link: "https://drive.google.com/file/d/1sTe9kr1RO046HAJnqFF-FnhG_K97x19-/view?usp=drivesdk" },
+  { title: "AI Impact Summit 2026", org: "Mission Upskill India Participant", icon: "◉", color: "#10b981", link: "https://drive.google.com/file/d/14gIowMQdKeXcMKMljfoe9sNn6f1qBaxv/view?usp=drivesdk" },
+  { title: "Startovate Participation Certificate", org: "IEEE Gujarat Section & IEEE India Council", icon: "◈", color: "#8b5cf6", link: "https://drive.google.com/file/d/1YRJUp4aPU83S1cAIQX-DM_12HrXDndGe/view?usp=drivesdk" }
 ];
 
 const playSound = (type) => {
@@ -460,7 +424,7 @@ function ProjectPreview({ project }) {
         </div>
       </div>
     );
-  } else if (project.title === "Brotherhood Clothing") {
+  } else if (project.title === "Ice Cream Web") {
     return (
       <div className="browser-mockup" style={{ borderColor: project.color + "25" }}>
         <div className="browser-header">
@@ -469,23 +433,29 @@ function ProjectPreview({ project }) {
             <span className="dot yellow"></span>
             <span className="dot green"></span>
           </div>
-          <div className="browser-bar">brotherhoodclothing.co</div>
+          <div className="browser-bar">icecreamweb.local</div>
         </div>
-        <div className="browser-content brotherhood-mock">
-          <div className="mock-shop-hero">
-            <div className="gold-monogram">B</div>
-            <span className="gold-text">BROTHERHOOD</span>
-            <span className="gold-sub">Luxury Apparel Storefront</span>
+        <div className="browser-content icecream-mock">
+          <div className="mock-shop-nav">
+            <span className="logo">🍦 Sweet Delights</span>
+            <div className="nav-items">
+              <span className="item">Catalog</span>
+              <span className="item active" style={{ color: "var(--preview-accent)" }}>Cart (3)</span>
+            </div>
           </div>
-          <div className="mock-shop-grid">
-            <div className="mock-shop-card">
-              <div className="mock-item-outline"></div>
-              <span className="item-price">Gold Coat</span>
+          <div className="icecream-showcase">
+            <div className="icecream-card">
+              <div className="icecream-cone"></div>
+              <span className="icecream-name">Strawberry Cup</span>
             </div>
-            <div className="mock-shop-card">
-              <div className="mock-item-outline"></div>
-              <span className="item-price">Silky Tee</span>
+            <div className="icecream-card">
+              <div className="icecream-cone chocolate"></div>
+              <span className="icecream-name">Choco Waffle</span>
             </div>
+          </div>
+          <div className="models-badge">
+            <span className="lbl">Django Models</span>
+            <span className="val">IceCream · Order · OrderItem · Contact</span>
           </div>
         </div>
       </div>
@@ -785,7 +755,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "skills", "projects", "certs", "contact"];
+      const sections = ["hero", "about", "skills", "projects", "journey", "certs", "education", "contact"];
       const scrollPos = window.scrollY + 250; // offset for scroll spy
       
       for (const section of sections) {
@@ -1243,78 +1213,99 @@ export default function Portfolio() {
         }
 
         /* Brotherhood Clothing Mock */
-        .brotherhood-mock {
-          --preview-accent: #D4AF37;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(20, 15, 10, 0.4) 100%);
+        /* Ice Cream Web Mock */
+        .icecream-mock {
+          --preview-accent: #f472b6;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(25, 15, 20, 0.45) 100%);
+          padding: 8px;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: 12px;
+          gap: 8px;
+          height: 100%;
         }
-        .brotherhood-mock .mock-shop-hero {
+        .icecream-mock .mock-shop-nav {
           display: flex;
-          flex-direction: column;
+          justify-content: space-between;
           align-items: center;
-          gap: 2px;
-          margin-bottom: 12px;
+          background: rgba(255,255,255,0.02);
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          padding: 4px 10px;
+          border-radius: 6px;
         }
-        .brotherhood-mock .gold-monogram {
-          font-family: 'Playfair Display', serif;
-          font-size: 24px;
+        .icecream-mock .mock-shop-nav .logo {
+          font-size: 9px;
           font-weight: 700;
-          color: var(--preview-accent);
-          text-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
-          border: 1px solid var(--preview-accent);
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .brotherhood-mock .gold-text {
-          font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.15em;
           color: #fff;
         }
-        .brotherhood-mock .gold-sub {
-          font-size: 6px;
-          color: #64748b;
-          text-transform: uppercase;
+        .icecream-mock .mock-shop-nav .nav-items {
+          display: flex;
+          gap: 8px;
         }
-        .brotherhood-mock .mock-shop-grid {
+        .icecream-mock .mock-shop-nav .nav-items .item {
+          font-size: 7px;
+          color: #64748b;
+        }
+        .icecream-mock .icecream-showcase {
           display: flex;
           gap: 12px;
-          width: 100%;
           justify-content: center;
+          align-items: center;
+          flex: 1;
         }
-        .brotherhood-mock .mock-shop-card {
+        .icecream-mock .icecream-card {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.04);
+          border-radius: 8px;
+          padding: 6px;
           width: 60px;
           display: flex;
           flex-direction: column;
+          align-items: center;
           gap: 4px;
         }
-        .brotherhood-mock .mock-item-outline {
-          height: 36px;
-          background: rgba(255,255,255,0.01);
-          border: 1px solid rgba(212, 175, 55, 0.1);
-          border-radius: 4px;
+        .icecream-mock .icecream-cone {
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #f472b6;
+          box-shadow: 0 0 10px rgba(244,114,182,0.4);
           position: relative;
         }
-        .brotherhood-mock .mock-item-outline::after {
+        .icecream-mock .icecream-cone.chocolate {
+          background: #854d0e;
+          box-shadow: 0 0 10px rgba(133,77,14,0.4);
+        }
+        .icecream-mock .icecream-cone::after {
           content: '';
           position: absolute;
-          inset: 8px;
-          border: 1.5px solid rgba(212, 175, 55, 0.25);
-          border-radius: 2px;
+          bottom: -8px;
+          left: 3px;
+          width: 0;
+          height: 0;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 10px solid #d97706;
         }
-        .brotherhood-mock .item-price {
-          font-size: 6px;
-          color: #64748b;
+        .icecream-mock .icecream-name {
+          font-size: 5.5px;
+          color: #94a3b8;
           text-align: center;
         }
+        .icecream-mock .models-badge {
+          position: absolute;
+          bottom: 6px;
+          right: 6px;
+          background: rgba(4,9,15,0.9);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 4px;
+          padding: 3px 6px;
+          font-family: monospace;
+          display: flex;
+          flex-direction: column;
+        }
+        .icecream-mock .models-badge .lbl { font-size: 5px; color: #64748b; }
+        .icecream-mock .models-badge .val { font-size: 6px; color: var(--preview-accent); font-weight: 700; white-space: nowrap; }
 
         /* Planto Mock */
         .planto-mock {
@@ -1461,20 +1452,45 @@ export default function Portfolio() {
               <span style={{ fontSize: "11px", color: "var(--accent-secondary)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Available for Collaborations</span>
             </div>
 
-            <h1 className="hero-title" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(38px, 6vw, 76px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-0.02em" }}>
-              <span style={{ color: "#f1f5f9" }}>Engineering</span><br />
-              <span style={{ background: "var(--theme-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Intelligent Systems</span><br />
-              <span style={{ color: "#f1f5f9" }}>&amp; Secure Frontiers</span>
+            <h1 className="hero-title" style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(34px, 5.5vw, 68px)", fontWeight: 800, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-0.02em" }}>
+              <span style={{ color: "#f1f5f9" }}>GAUSWAMI ASHISH</span><br />
+              <span style={{ background: "var(--theme-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Computer Engineering</span><br />
+              <span style={{ color: "#f1f5f9" }}>&amp; Cybersecurity</span>
             </h1>
 
-            <p className="hero-desc" style={{ color: "#94a3b8", fontSize: "clamp(15px, 2vw, 18px)", lineHeight: 1.7, maxWidth: "620px", marginBottom: "40px", minHeight: "56px" }}>
-              <Typewriter text="Transforming complex problems into elegant, scalable, and AI-driven solutions. I build software that thinks, scales, and protects." speed={25} />
+            <p className="hero-desc" style={{ color: "#94a3b8", fontSize: "clamp(15px, 2vw, 17px)", lineHeight: 1.7, maxWidth: "620px", marginBottom: "36px", minHeight: "56px" }}>
+              <Typewriter text="B.Tech Computer Engineering student at Ganpat University. Focused on Generative AI integration, secure full-stack software development, and cybersecurity." speed={25} />
             </p>
 
-            <div className="hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "48px" }}>
-              <GlowBtn primary onClick={() => scrollTo("projects")}>Explore Projects ⬡</GlowBtn>
+            <div className="hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "24px" }}>
+              <GlowBtn primary onClick={() => scrollTo("projects")}>View Projects ⬡</GlowBtn>
               <a href="https://drive.google.com/file/d/1xRnLrVrKMPoBTUeW_KD1FBToYriMM8P-/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <GlowBtn>Download Resume 📄</GlowBtn>
+                <GlowBtn>View Resume 📄</GlowBtn>
+              </a>
+              <GlowBtn onClick={() => scrollTo("contact")}>Contact Me ↗</GlowBtn>
+            </div>
+
+            <div className="hero-social-links" style={{ display: "flex", gap: "20px", alignItems: "center", marginBottom: "40px" }}>
+              <a 
+                href="https://github.com/gauswamiashih" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: "#94a3b8", textDecoration: "none", fontSize: "13px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "var(--accent-primary)"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}
+              >
+                <span>⌥ GitHub</span>
+              </a>
+              <span style={{ color: "#2d3748" }}>|</span>
+              <a 
+                href="https://www.linkedin.com/in/gauswami-ashish-078870293?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: "#94a3b8", textDecoration: "none", fontSize: "13px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "var(--accent-primary)"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}
+              >
+                <span>◈ LinkedIn</span>
               </a>
             </div>
 
@@ -1585,23 +1601,34 @@ export default function Portfolio() {
               Engineering <span style={{ background: "linear-gradient(135deg,#63b3ed,#8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Tomorrow</span><br />Today.
             </h2>
             <p style={{ color: "#94a3b8", fontSize: "16px", lineHeight: 1.8, marginBottom: "24px" }}>
-              I'm <strong style={{ color: "#f1f5f9" }}>Gauswami Ashish Devpuri</strong> — a B.Tech Computer Engineering student at Ganpat University, building systems that sit at the intersection of artificial intelligence, security, and elegant software.
+              I am a B.Tech Computer Engineering student at Ganpat University (2023–2027) with a CGPA of **7.13 / 10**. My focus areas include Generative AI integration, secure software architectures, and cybersecurity.
             </p>
-            <p style={{ color: "#94a3b8", fontSize: "16px", lineHeight: 1.8, marginBottom: "24px" }}>
-              My work is driven by one core belief: technology should be intelligent, secure, and beautiful. I don't build products — I architect experiences. From civic SaaS platforms to AI-powered automation engines, every project is an attempt to compress the future into the present.
-            </p>
-            <p style={{ color: "#94a3b8", fontSize: "16px", lineHeight: 1.8 }}>
-              When I'm not writing code, I'm competing in hackathons, exploring cybersecurity, or obsessing over the next wave of AI breakthroughs that will redefine how humans interact with machines.
-            </p>
+            
+            {/* Highlights Grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "20px", marginBottom: "24px" }}>
+              {[
+                { title: "AI & ML Integration", desc: "Architecting web systems using LLM/AI APIs, prompt engineering frameworks, and AWS Gen AI pipelines." },
+                { title: "Cybersecurity & LLM Trust", desc: "Certified LLM Security Professional (CLLMSP) with expertise in prompt injection detection and secure coding." },
+                { title: "Full-Stack Development", desc: "Building responsive frontend dashboards, e-commerce cash on delivery checkout layers, and relational schemas." }
+              ].map((hl, idx) => (
+                <div key={idx} style={{ display: "flex", gap: "16px", alignItems: "start" }}>
+                  <div style={{ color: "var(--accent-primary)", fontSize: "16px", marginTop: "4px" }}>⬡</div>
+                  <div>
+                    <h4 style={{ color: "#f1f5f9", fontSize: "15px", fontWeight: 700, marginBottom: "4px" }}>{hl.title}</h4>
+                    <p style={{ color: "#94a3b8", fontSize: "13px", lineHeight: 1.5 }}>{hl.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               {[
-                { label: "Projects", val: 5, suffix: "+", icon: "◆", color: "#3b82f6" },
-                { label: "Techs", val: 20, suffix: "+", icon: "◈", color: "#8b5cf6" },
-                { label: "Hackathons", val: 5, suffix: "+", icon: "⬡", color: "#10b981" },
-                { label: "Certs", val: 7, suffix: "+", icon: "◉", color: "#f59e0b" },
+                { label: "Projects", val: 3, suffix: "", icon: "◆", color: "#3b82f6" },
+                { label: "Skills", val: 15, suffix: "", icon: "◈", color: "#8b5cf6" },
+                { label: "Hackathons", val: 1, suffix: "", icon: "⬡", color: "#10b981" },
+                { label: "Certs", val: 5, suffix: "", icon: "◉", color: "#f59e0b" },
               ].map(s => (
                 <div 
                   key={s.label} 
@@ -1683,149 +1710,153 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* BENTO BOX VISION GRID */}
-      <section style={{ padding: "120px 8%", background: "linear-gradient(180deg,#020408,#040e1f,#020408)", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(59,130,246,0.05), transparent 70%)" }} />
-        
-        <div style={{ maxWidth: "1200px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 2 }}>
-          <p className="section-label">The Vision</p>
-          <h2 className="section-title" style={{ marginBottom: "28px" }}>
-            Pioneering the <span style={{ background: "linear-gradient(135deg,#63b3ed,#8b5cf6,#ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Next Era</span>
-          </h2>
-          <p style={{ color: "#94a3b8", fontSize: "17px", maxWidth: "700px", margin: "0 auto 64px", lineHeight: 1.8 }}>
-            Transitioning from static layouts to intelligent, context-aware digital platforms. This is the blueprint for modern design.
-          </p>
-
-          {/* Bento Box Visual Grid */}
-          <div className="bento-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "160px", gap: "20px", maxWidth: "1000px", margin: "0 auto" }}>
+      {/* JOURNEY */}
+      <section id="journey" style={{ padding: "120px 8%", position: "relative" }}>
+        <div style={{ position: "absolute", top: "25%", left: "5%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(99,179,237,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "80px" }}>
+            <p className="section-label">My Timeline</p>
+            <h2 className="section-title">Journey &amp; <span style={{ background: "linear-gradient(135deg,#3b82f6,#8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Achievements</span></h2>
+          </div>
+          
+          <div style={{ position: "relative", paddingLeft: "32px", borderLeft: "2px solid rgba(255,255,255,0.06)" }}>
             {[
-              { 
-                ref: bentoRef1,
-                label: "AI Systems", 
-                val: "Neural Intelligence", 
-                color: "#8b5cf6", 
-                cols: 2, 
-                rows: 2, 
-                desc: "Self-learning models driving next-gen predictive algorithms.",
-                icon: (
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #8b5cf6)" }}>
-                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                    <path d="M12 6v12M8 10h8"/>
-                  </svg>
-                )
+              {
+                time: "June 22, 2026",
+                title: "Certified LLM Security Professional (CLLMSP)",
+                desc: "Certified by Red Team Leaders in Large Language Model security, prompt injection defenses, vulnerabilities mapping, and AI guardrails.",
+                icon: "🛡️",
+                color: "#ef4444"
               },
-              { 
-                ref: bentoRef2,
-                label: "Security", 
-                val: "Zero Trust Architecture", 
-                color: "#10b981", 
-                cols: 2, 
-                rows: 1, 
-                desc: "Verify explicitly. Least privilege access. Assume breach.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #10b981)" }}>
-                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                  </svg>
-                )
+              {
+                time: "2026",
+                title: "2nd Position — Cyber Hackathon",
+                desc: "Awarded 2nd position at the UVPCE / Ganpat University TechVerse 2026 Cyber Hackathon, demonstrating quick prototyping and secure application design.",
+                icon: "🏆",
+                color: "#3b82f6"
               },
-              { 
-                ref: bentoRef3,
-                label: "Automation", 
-                val: "Autonomous Ops", 
-                color: "#f59e0b", 
-                cols: 1, 
-                rows: 1, 
-                desc: "Self-healing deployments.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #f59e0b)" }}>
-                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                )
+              {
+                time: "2026",
+                title: "AI Impact Summit 2026",
+                desc: "Participated as an active member in Mission Upskill India, focusing on national AI development initiatives and software scaling frameworks.",
+                icon: "✦",
+                color: "#10b981"
               },
-              { 
-                ref: bentoRef4,
-                label: "Architecture", 
-                val: "Serverless Scale", 
-                color: "#3b82f6", 
-                cols: 1, 
-                rows: 1, 
-                desc: "Zero maintenance.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #3b82f6)" }}>
-                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                  </svg>
-                )
+              {
+                time: "2026",
+                title: "Gen AI on AWS",
+                desc: "Active student builder in the AWS Student Builder Groups at Ganpat University, deploying cloud generative models.",
+                icon: "☁️",
+                color: "#f59e0b"
               },
-              { 
-                ref: bentoRef5,
-                label: "Performance", 
-                val: "Edge Native Compute", 
-                color: "#ec4899", 
-                cols: 2, 
-                rows: 1, 
-                desc: "Deploying code steps away from client browsers for sub-millisecond response rates.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #ec4899)" }}>
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                  </svg>
-                )
+              {
+                time: "2026",
+                title: "Startovate IEEE Certificate",
+                desc: "Awarded participation certificate by IEEE Gujarat Section & IEEE India Council for startup innovation.",
+                icon: "◈",
+                color: "#8b5cf6"
               },
-              { 
-                ref: bentoRef6,
-                label: "Experience", 
-                val: "Immersive User Interface", 
-                color: "#0ea5e9", 
-                cols: 2, 
-                rows: 1, 
-                desc: "Blending rich micro-interactions and audio triggers to lock in viewer attention.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 8px #0ea5e9)" }}>
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  </svg>
-                )
-              },
-            ].map((item, i) => (
-              <div 
-                key={item.label} 
-                ref={item.ref}
-                className={`bento-glow-card bento-col-${item.cols} bento-row-${item.rows}`}
-                style={{ 
-                  textAlign: item.cols > 1 ? "left" : "center",
-                  display: "flex", 
-                  flexDirection: "column", 
-                  justifyContent: "center",
-                  animation: heroVisible ? `slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.15}s forwards` : "none",
-                  opacity: 0
-                }}
-                onMouseMove={handleBentoMouseMove}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = item.color + "70"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; }}
-              >
-                {item.cols > 1 && (
-                  <div style={{ position: "absolute", bottom: "-20%", right: "-10%", width: "180px", height: "180px", background: `radial-gradient(circle, ${item.color}15, transparent 70%)`, pointerEvents: "none" }} />
-                )}
-                
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: item.cols > 1 ? "16px" : "10px", justifyContent: item.cols > 1 ? "flex-start" : "center" }}>
-                  <div style={{ color: item.color }}>{item.icon}</div>
-                  {item.cols > 1 && (
-                    <div style={{ color: item.color, fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>{item.label}</div>
-                  )}
+              {
+                time: "2023 – Present",
+                title: "B.Tech in Computer Engineering",
+                desc: "Enrolled in B.Tech Computer Engineering at Ganpat University. Maintaining a CGPA of 7.13 / 10 with a core focus on cybersecurity, AI, and full-stack development.",
+                icon: "🎓",
+                color: "#0ea5e9"
+              }
+            ].map((node, idx) => (
+              <Reveal key={idx} delay={idx * 100}>
+                <div style={{ position: "relative", marginBottom: "48px" }}>
+                  {/* Timeline dot */}
+                  <div style={{
+                    position: "absolute",
+                    left: "-42px",
+                    top: "4px",
+                    width: "18px",
+                    height: "18px",
+                    borderRadius: "50%",
+                    background: "#020408",
+                    border: `3px solid ${node.color}`,
+                    boxShadow: `0 0 10px ${node.color}`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 2
+                  }} />
+                  {/* Card content */}
+                  <div className="glass-panel" style={{ borderRadius: "16px", padding: "28px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginBottom: "12px", alignItems: "center" }}>
+                      <span style={{ fontSize: "11px", fontWeight: 700, color: node.color, border: `1px solid ${node.color}30`, background: `${node.color}08`, padding: "4px 12px", borderRadius: "100px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{node.time}</span>
+                      <span style={{ fontSize: "20px" }}>{node.icon}</span>
+                    </div>
+                    <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "18px", fontWeight: 800, color: "#f1f5f9", marginBottom: "8px" }}>{node.title}</h3>
+                    <p style={{ color: "#94a3b8", fontSize: "14px", lineHeight: 1.6, fontFamily: "'Space Grotesk', sans-serif" }}>{node.desc}</p>
+                  </div>
                 </div>
-                
-                <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, color: "#f1f5f9", fontSize: item.cols > 1 ? "24px" : "16px", marginBottom: "8px" }}>
-                  {item.val}
-                </div>
-                
-                {item.cols > 1 ? (
-                  <p style={{ color: "#94a3b8", fontSize: "14px", lineHeight: 1.6, maxWidth: "85%" }}>{item.desc}</p>
-                ) : (
-                  <div style={{ color: "#475569", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700 }}>{item.label}</div>
-                )}
-              </div>
+              </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EDUCATION */}
+      <section id="education" className="grid-bg" style={{ padding: "120px 8%", position: "relative" }}>
+        <div style={{ position: "absolute", top: "50%", right: "5%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(16,185,129,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "80px" }}>
+            <p className="section-label">Academic Credentials</p>
+            <h2 className="section-title">Education &amp; <span style={{ background: "linear-gradient(135deg,#10b981,#34d399)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Coursework</span></h2>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }}>
+            {/* College Card */}
+            <Reveal delay={100}>
+              <div className="glass-panel" style={{ borderRadius: "24px", padding: "40px", border: "1px solid rgba(255,255,255,0.06)", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", bottom: "-20%", right: "-10%", width: "200px", height: "200px", background: "radial-gradient(circle, rgba(16,185,129,0.08), transparent 70%)", pointerEvents: "none" }} />
+                
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "28px", flexWrap: "wrap", gap: "16px" }}>
+                  <div>
+                    <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "24px", fontWeight: 800, color: "#f1f5f9", marginBottom: "6px" }}>Ganpat University</h3>
+                    <p style={{ color: "#10b981", fontSize: "14px", fontWeight: 600 }}>Mehsana, Gujarat, India</p>
+                  </div>
+                  <span style={{ fontSize: "11px", fontWeight: 700, color: "#10b981", border: "1px solid rgba(16,185,129,0.3)", background: "rgba(16,185,129,0.08)", padding: "6px 14px", borderRadius: "100px", textTransform: "uppercase" }}>Jul 2023 – Present</span>
+                </div>
+
+                <div style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "24px" }}>
+                  <div style={{ fontSize: "36px" }}>🎓</div>
+                  <div>
+                    <h4 style={{ color: "#e2e8f0", fontSize: "17px", fontWeight: 700, margin: 0 }}>B.Tech in Computer Engineering</h4>
+                    <p style={{ color: "#94a3b8", fontSize: "13px", margin: "4px 0 0" }}>Focus: AI/ML Integration &amp; Cybersecurity Safeguards</p>
+                  </div>
+                </div>
+
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "12px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", padding: "12px 20px", borderRadius: "16px" }}>
+                  <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Cumulative CGPA:</span>
+                  <strong style={{ fontSize: "18px", color: "#f1f5f9", fontFamily: "'Syne', sans-serif" }}>7.13 / 10</strong>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Coursework Card */}
+            <Reveal delay={200}>
+              <div className="glass-panel" style={{ borderRadius: "24px", padding: "40px", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "20px", fontWeight: 800, color: "#f1f5f9", marginBottom: "24px" }}>Relevant Coursework</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                  {[
+                    "Data Structures & Algorithms (DSA)",
+                    "Object-Oriented Programming (OOP)",
+                    "Database Management Systems (DBMS)",
+                    "Web Technologies (HTML, CSS, JS, React)",
+                    "Computer Networks & Protocols",
+                    "Software Engineering Principles"
+                  ].map((course, idx) => (
+                    <div key={idx} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                      <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10b981" }} />
+                      <span style={{ color: "#94a3b8", fontSize: "14px", fontWeight: 500 }}>{course}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
